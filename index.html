@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Katie Miller — Wellness Coach for Women 40+</title>
+  <meta name="description" content="Women 40+ losing weight, reclaiming energy, and finally getting results — through fitness, hormonal health, and peptide education. Coached by Katie Miller, CHC, CPT, 20+ years experience." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── QUIZ ─────────────────────────────────────── */
+    .quiz-section { background: var(--bg-dark); padding: 5rem 0; color: #fff; }
+    .quiz-section .eyebrow { color: var(--accent); }
+    .quiz-section h2 { color: #fff; margin-bottom: 0.75rem; }
+    .quiz-section .section__header p { color: rgba(255,255,255,0.65); }
+
+    .quiz { max-width: 680px; margin: 0 auto; }
+
+    .quiz__step { display: none; }
+    .quiz__step.active { display: block; animation: fadeIn 0.3s ease; }
+
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+    .quiz__progress {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .quiz__progress-dot {
+      height: 4px;
+      flex: 1;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.15);
+      transition: background 0.3s;
+    }
+    .quiz__progress-dot.done { background: var(--accent); }
+
+    .quiz__question {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+    }
+
+    .quiz__options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .quiz__option {
+      background: rgba(255,255,255,0.06);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .quiz__option:hover {
+      background: rgba(39,178,177,0.2);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .quiz__result {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .quiz__result.visible { display: block; }
+
+    .quiz__result-card {
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid var(--accent);
+      border-radius: 16px;
+      padding: 2.5rem;
+    }
+    .quiz__result-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .quiz__result-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .quiz__result-desc {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.97rem;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+    .quiz__result-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .quiz__restart {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.82rem;
+      cursor: pointer;
+      margin-top: 1.25rem;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      text-decoration: underline;
+    }
+    .quiz__restart:hover { color: rgba(255,255,255,0.7); }
+
+    /* ── CREDENTIALS TAGS ─────────────────────────── */
+    .cred-tag {
+      display: inline-block;
+      background: var(--accent-light);
+      border: 1px solid rgba(39,178,177,0.35);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent-dark);
+    }
+    .cred-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.25rem; }
+
+    /* ── PRICING CARDS ────────────────────────────── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      border-radius: 20px;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .pricing-card--membership {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .pricing-card--consult {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+    }
+
+    .pricing-card__badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+      align-self: flex-start;
+    }
+    .pricing-card--membership .pricing-card__badge {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+    .pricing-card--consult .pricing-card__badge {
+      background: var(--bg-soft);
+      color: var(--text-muted);
+    }
+
+    .pricing-card__icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .pricing-card__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-card__price {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      line-height: 1;
+      margin: 0.75rem 0 0.25rem;
+    }
+    .pricing-card__price span {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+    .pricing-card--membership .pricing-card__price span { opacity: 0.75; }
+    .pricing-card--consult .pricing-card__price span { color: var(--text-muted); }
+
+    .pricing-card__sub {
+      font-size: 0.82rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+    .pricing-card--membership .pricing-card__sub { color: rgba(255,255,255,0.65); }
+    .pricing-card--consult .pricing-card__sub { color: var(--text-muted); }
+
+    .pricing-card__features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-bottom: 2rem;
+      flex: 1;
+    }
+    .pricing-card__features li {
+      font-size: 0.9rem;
+      padding-left: 1.4rem;
+      position: relative;
+    }
+    .pricing-card__features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+    .pricing-card--membership .pricing-card__features li { color: rgba(255,255,255,0.88); }
+    .pricing-card--membership .pricing-card__features li::before { color: rgba(255,255,255,0.7); }
+    .pricing-card--consult .pricing-card__features li { color: var(--text-muted); }
+    .pricing-card--consult .pricing-card__features li::before { color: var(--accent); }
+
+    .pricing-card--membership .btn--outline {
+      color: #fff;
+      border-color: rgba(255,255,255,0.5);
+      align-self: flex-start;
+    }
+    .pricing-card--membership .btn--outline:hover {
+      border-color: #fff;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* ── "IS THIS YOU" CARDS ──────────────────────── */
+    .for-you-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .for-you-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+    .for-you-card--highlight {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .for-you-card__icon { font-size: 2rem; margin-bottom: 1rem; }
+    .for-you-card__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .for-you-card__desc {
+      font-size: 0.93rem;
+      line-height: 1.7;
+    }
+    .for-you-card__desc { color: var(--text-muted); }
+    .for-you-card--highlight .for-you-card__desc { color: rgba(255,255,255,0.82); }
+
+    @media (max-width: 768px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+      .for-you-grid { grid-template-columns: 1fr; }
+      .quiz__result-ctas { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo">
+          <span class="nav__logo-name">Katie Miller</span>
+          <span class="nav__logo-sub">Wellness Coach</span>
+        </a>
+        <ul class="nav__links">
+          <li><a href="my-story.html">My Story</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener">Peptides</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener">Community</a></li>
+          <li><a href="contact.html">Work With Me</a></li>
+          <li><a href="contact.html" class="btn-nav">Book a Session →</a></li>
+        </ul>
+        <button class="nav__hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <nav class="nav__drawer">
+    <a href="my-story.html">My Story</a>
+    <a href="programs.html">Programs</a>
+    <a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener">Peptides</a>
+    <a href="faq.html">FAQ</a>
+    <a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener">Community</a>
+    <a href="contact.html">Work With Me</a>
+    <a href="contact.html" class="btn btn--primary" style="margin-top:0.5rem;">Book a Session →</a>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" style="background:#fdf8f4;">
+    <div class="container">
+      <div class="hero__inner">
+
+        <div class="hero__copy">
+          <p class="eyebrow hero__tag">Real story &nbsp;·&nbsp; Real peptides &nbsp;·&nbsp; Real results</p>
+          <h1 class="hero__headline">
+            I was already doing<br>
+            <em>all the right things</em><br>
+            — and still wasn't losing weight.
+          </h1>
+          <p class="hero__sub">
+            Certified Health Coach. Certified Personal Trainer. 20+ years of experience. I trained consistently, tracked everything, and followed every rule — and my body still wasn't responding. Then I added one thing: a peptide. I lost 55 pounds in 9 months. Now I help women 40+ find their missing piece.
+          </p>
+          <div class="btn-group" style="flex-direction:column;align-items:flex-start;">
+            <a href="https://buy.stripe.com/00wbIVf8x89642Z5EM5c400" target="_blank" rel="noopener" class="btn btn--primary">Join for $27/month →</a>
+            <a href="my-story.html" class="btn btn--outline">Read my story →</a>
+          </div>
+        </div>
+
+        <div class="hero__media">
+          <div class="hero__img-wrap">
+            <img src="images/katie-2.png" alt="Katie Miller before and after losing 55 lbs" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+          </div>
+          <div class="hero__badge hero__badge--br">
+            <span class="hero__badge-value">55 lbs</span>
+            <span class="hero__badge-label">Katie lost in 9 months</span>
+            <span class="hero__badge-sub">Her own result</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATS STRIP ===== -->
+  <section class="stats" style="background:#fdf8f4;">
+    <div class="container">
+      <div class="stats__grid">
+        <div class="stat-item">
+          <div class="stat-item__value">20+</div>
+          <div class="stat-item__label">Years health coaching</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-item__value">3</div>
+          <div class="stat-item__label">Certifications — CHC · CPT · BS Health Ed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-item__value">$27</div>
+          <div class="stat-item__label">Full membership — less than $1/day</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== IS THIS YOU? ===== -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Is this you?</p>
+        <h2>This coaching was built for women who are done guessing</h2>
+        <p>If any of these sound familiar, you're in the right place.</p>
+      </div>
+      <div class="for-you-grid">
+        <div class="for-you-card">
+          <div class="for-you-card__icon">🔄</div>
+          <h3 class="for-you-card__title">You've tried everything and you're still stuck</h3>
+          <p class="for-you-card__desc">Diets, workout programs, tracking — and the scale won't move. You're not lazy or broken. You're missing information that most coaches simply don't have.</p>
+        </div>
+        <div class="for-you-card for-you-card--highlight">
+          <div class="for-you-card__icon">⚡</div>
+          <h3 class="for-you-card__title">You're in perimenopause and your body feels different</h3>
+          <p class="for-you-card__desc">Your 40s changed everything — weight, energy, sleep, mood. Standard fitness advice wasn't designed for your hormones. This coaching was specifically built for where you are.</p>
+        </div>
+        <div class="for-you-card">
+          <div class="for-you-card__icon">🧬</div>
+          <h3 class="for-you-card__title">You want the whole picture — fitness, hormones, peptides</h3>
+          <p class="for-you-card__desc">You're done piecing advice together from ten different sources. You want one coach who understands fitness, women's hormonal health, and peptides — and can explain it clearly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUIZ ===== -->
+  <section class="quiz-section">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Find your fit</p>
+        <h2>Which program is right for you?</h2>
+        <p>Answer 3 quick questions and find out exactly where to start.</p>
+      </div>
+      <div class="quiz" id="quiz">
+        <div class="quiz__progress" id="quiz-progress">
+          <div class="quiz__progress-dot done" id="dot-1"></div>
+          <div class="quiz__progress-dot" id="dot-2"></div>
+          <div class="quiz__progress-dot" id="dot-3"></div>
+        </div>
+
+        <div class="quiz__step active" data-step="1">
+          <p class="quiz__question">What's your biggest challenge right now?</p>
+          <div class="quiz__options">
+            <button class="quiz__option" data-value="weight">I can't lose weight no matter what I try</button>
+            <button class="quiz__option" data-value="perimenopause">I'm dealing with perimenopause — weight, energy, mood, sleep</button>
+            <button class="quiz__option" data-value="peptides">I want to learn about peptides and whether they could help me</button>
+            <button class="quiz__option" data-value="all">I want the full picture — fitness, hormones, and peptides together</button>
+          </div>
+        </div>
+
+        <div class="quiz__step" data-step="2">
+          <p class="quiz__question">How long have you been struggling with this?</p>
+          <div class="quiz__options">
+            <button class="quiz__option" data-value="recent">Less than 6 months — I want to get ahead of it</button>
+            <button class="quiz__option" data-value="medium">6 months to 2 years — I've been trying</button>
+            <button class="quiz__option" data-value="long">More than 2 years — I've tried a lot of things that haven't worked</button>
+          </div>
+        </div>
+
+        <div class="quiz__step" data-step="3">
+          <p class="quiz__question">What kind of support sounds right for you?</p>
+          <div class="quiz__options">
+            <button class="quiz__option" data-value="community">Community, live calls, and ongoing accountability month after month</button>
+            <button class="quiz__option" data-value="private">A private one-on-one session focused entirely on me and my situation</button>
+          </div>
+        </div>
+
+        <div class="quiz__result" id="quiz-result">
+          <div class="quiz__result-card">
+            <p class="quiz__result-label" id="result-label"></p>
+            <p class="quiz__result-title" id="result-title"></p>
+            <p class="quiz__result-desc" id="result-desc"></p>
+            <div class="quiz__result-ctas" id="result-ctas"></div>
+          </div>
+          <button class="quiz__restart" id="quiz-restart">Start over</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MY STORY / THE MISSING PIECE ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="two-col">
+        <div class="story-img">
+          <img src="images/katie-1.jpeg" alt="Katie Miller showing her transformation" style="width:100%;border-radius:16px;object-fit:cover;display:block;">
+        </div>
+        <div class="story-text">
+          <p class="eyebrow">The missing piece</p>
+          <h2>I lost 55 lbs in 9 months — after years of doing everything "right."</h2>
+          <p>I'm a Certified Health Coach with a BS in Health Education and over 20 years of coaching experience. I trained consistently, tracked my nutrition, and followed every piece of evidence-based advice I knew.</p>
+          <p>And my body still wasn't responding.</p>
+          <p>Then I added one thing — a peptide — and everything shifted. Within 9 months I had lost 55 pounds. My energy came back. My inflammation dropped. My body finally started working <em>with</em> me.</p>
+          <p>Now I teach other women 40+ — especially those navigating perimenopause — exactly what I wish someone had told me sooner.</p>
+          <a href="my-story.html" class="btn btn--outline">Read the full story →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROGRAMS / PRICING ===== -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Programs</p>
+        <h2>Two ways to work with me</h2>
+        <p>Both options are built specifically around what actually works for women 40+.</p>
+      </div>
+      <div class="pricing-grid">
+
+        <div class="pricing-card pricing-card--membership">
+          <span class="pricing-card__badge">Most popular · Best value</span>
+          <div class="pricing-card__icon">🌟</div>
+          <h3 class="pricing-card__title">Monthly Membership</h3>
+          <div class="pricing-card__price">$27<span>/month</span></div>
+          <p class="pricing-card__sub">Everything you need — less than a dollar a day</p>
+          <ul class="pricing-card__features">
+            <li>Weekly live coaching calls with Katie</li>
+            <li>Perimenopause coaching &amp; education</li>
+            <li>Peptide education &amp; consultations</li>
+            <li>Custom meal plans</li>
+            <li>Recipe guides &amp; food guides</li>
+            <li>Workouts designed for women 40+</li>
+            <li>Free wellness guides</li>
+          </ul>
+          <a href="https://buy.stripe.com/00wbIVf8x89642Z5EM5c400" target="_blank" rel="noopener" class="btn btn--outline">Join the membership →</a>
+        </div>
+
+        <div class="pricing-card pricing-card--consult">
+          <span class="pricing-card__badge">Private · Personalized</span>
+          <div class="pricing-card__icon">🎯</div>
+          <h3 class="pricing-card__title">1:1 Consultation</h3>
+          <div class="pricing-card__price">$197<span> / session</span></div>
+          <p class="pricing-card__sub">40-minute private Zoom with Katie</p>
+          <ul class="pricing-card__features">
+            <li>Private session focused entirely on you</li>
+            <li>Personalized fitness &amp; nutrition review</li>
+            <li>Hormonal health &amp; perimenopause guidance</li>
+            <li>Peptide education tailored to your goals</li>
+            <li>Actionable protocol to take home</li>
+          </ul>
+          <a href="contact.html" class="btn btn--outline">Book a session →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Results</p>
+        <h2>Real women. Real numbers.</h2>
+        <p>These are the results that happen when you finally have the full picture.</p>
+      </div>
+      <div class="testimonial-grid" style="grid-template-columns:repeat(2,1fr);">
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__quote">"I lost 12 pounds in 6 weeks. I had been stuck at the same weight for over a year. Katie showed me exactly what was missing — and it worked."</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">★</div>
+            <div>
+              <div class="testimonial__name">Membership Client</div>
+              <div class="testimonial__detail">12 lbs lost · 6 weeks</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__quote">"I had no idea how our call was going to go but it was way better than I expected. You have so much light. I opened up because of how comfortable you made me feel. You have inspired me, helped me get unstuck, and figure out my purpose. I made so much progress since our first call — I want this girl to be my mentor!"</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">MM</div>
+            <div>
+              <div class="testimonial__name">Megan M.</div>
+              <div class="testimonial__detail">1:1 Coaching Client</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__quote">"My heart — wide open with joy and nervousness, but the nervousness is fueling my fire. I want my dreams to come true and I know with hard work, my comfortable life is coming. I want to sit on my deck and look at my lake and say yes I did this — and you helped pull that vision and this passion out of me. So very thankful."</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">MC</div>
+            <div>
+              <div class="testimonial__name">Melissa C.</div>
+              <div class="testimonial__detail">Coaching Client</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__quote">"I certainly don't tell everyone my story, but you were soooo easy to talk to and we had such an easy rapport that I wound up spilling my guts. I needed to get that off my chest — I truly didn't realize how much it was affecting my every day life. I can't thank you enough for your kind words of wisdom and support. One day we'll meet and I'll give you a huge hug!!"</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">LR</div>
+            <div>
+              <div class="testimonial__name">Lysette R.</div>
+              <div class="testimonial__detail">Coaching Client</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT KATIE ===== -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="two-col">
+        <div class="story-text">
+          <p class="eyebrow">About Katie</p>
+          <h2>20+ years of expertise. Built for women like you.</h2>
+          <p>I'm a Certified Health Coach, Certified Personal Trainer, and hold a Bachelor of Science in Health Education. I've spent over two decades helping women get the results they've been working toward.</p>
+          <p>My approach isn't just fitness. It's the intersection of strength training, women's hormonal health, perimenopause support, and peptide education — combined into one framework that actually makes sense for women over 40.</p>
+          <p>I've been through the frustration personally. That's what drives everything I do.</p>
+          <div class="cred-tags">
+            <span class="cred-tag">Certified Health Coach</span>
+            <span class="cred-tag">Certified Personal Trainer</span>
+            <span class="cred-tag">BS · Health Education</span>
+            <span class="cred-tag">20+ Years Coaching</span>
+            <span class="cred-tag">Perimenopause Specialist</span>
+            <span class="cred-tag">Peptide Education</span>
+          </div>
+        </div>
+        <div class="story-img">
+          <img src="images/katie-3.jpeg" alt="Katie Miller, Wellness Coach" style="width:100%;border-radius:16px;object-fit:cover;display:block;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BANNER ===== -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Start for $27. Change everything.</h2>
+      <p>Join the membership and get immediate access to weekly live coaching, perimenopause guidance, peptide education, meal plans, workouts, and more — for less than a dollar a day.</p>
+      <div class="btn-group" style="justify-content:center;">
+        <a href="https://buy.stripe.com/00wbIVf8x89642Z5EM5c400" target="_blank" rel="noopener" class="btn btn--primary">Join the membership →</a>
+        <a href="contact.html" class="btn btn--outline-white">Book a 1:1 session — $197</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__brand-name">Katie Miller</div>
+          <div class="footer__brand-sub">Wellness Coach</div>
+        </div>
+        <ul class="footer__links">
+          <li><a href="my-story.html">My Story</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener">Peptides</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Work With Me</a></li>
+        </ul>
+      </div>
+      <div class="footer__bottom">
+        © 2026 Katie Miller Wellness. All rights reserved. &nbsp;|&nbsp; Results may vary. Individual outcomes depend on effort, consistency, and individual factors. Peptide education is for informational purposes only and does not constitute medical advice.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // ── QUIZ LOGIC ─────────────────────────────────────────────────────────────
+    (function () {
+      const quiz = document.getElementById('quiz');
+      if (!quiz) return;
+
+      const steps = quiz.querySelectorAll('.quiz__step');
+      const resultEl = document.getElementById('quiz-result');
+      const dots = [
+        document.getElementById('dot-1'),
+        document.getElementById('dot-2'),
+        document.getElementById('dot-3'),
+      ];
+
+      let answers = [];
+      let currentStep = 0;
+
+      function showStep(index) {
+        steps.forEach((s, i) => s.classList.toggle('active', i === index));
+        dots.forEach((d, i) => d.classList.toggle('done', i <= index));
+        resultEl.classList.remove('visible');
+      }
+
+      function showResult() {
+        steps.forEach(s => s.classList.remove('active'));
+        resultEl.classList.add('visible');
+
+        const supportPref = answers[2];
+        const duration = answers[1];
+
+        let label, title, desc, ctaHTML;
+
+        if (supportPref === 'private') {
+          label = 'Your recommendation';
+          title = '1:1 Consultation — $197';
+          desc = 'A private 40-minute Zoom with Katie gives you a personalized deep-dive into your specific situation — your goals, your hormones, your questions. You'll leave with a clear, actionable plan built just for you.';
+          ctaHTML = `
+            <a href="contact.html" class="btn btn--primary">Book your session →</a>
+            <a href="programs.html" class="btn btn--outline-white" style="color:#fff;border-color:rgba(255,255,255,0.4);">See all options</a>`;
+        } else {
+          label = 'Your recommendation';
+          title = 'Monthly Membership — $27/month';
+          desc = 'The membership gives you everything: weekly live coaching calls, perimenopause education, peptide consultations, meal plans, workouts, and a community of women on the same journey — all for less than a dollar a day.';
+          ctaHTML = `
+            <a href="https://buy.stripe.com/00wbIVf8x89642Z5EM5c400" target="_blank" rel="noopener" class="btn btn--primary">Join the membership →</a>
+            <a href="programs.html" class="btn btn--outline-white" style="color:#fff;border-color:rgba(255,255,255,0.4);">See all options</a>`;
+        }
+
+        if (duration === 'long') {
+          desc += ' You\'ve been at this a while — you deserve a coach who actually has the full picture.';
+        }
+
+        document.getElementById('result-label').textContent = label;
+        document.getElementById('result-title').textContent = title;
+        document.getElementById('result-desc').textContent = desc;
+        document.getElementById('result-ctas').innerHTML = ctaHTML;
+      }
+
+      steps.forEach((step, stepIndex) => {
+        step.querySelectorAll('.quiz__option').forEach(btn => {
+          btn.addEventListener('click', () => {
+            answers[stepIndex] = btn.dataset.value;
+            if (stepIndex < steps.length - 1) {
+              currentStep = stepIndex + 1;
+              showStep(currentStep);
+            } else {
+              showResult();
+            }
+          });
+        });
+      });
+
+      document.getElementById('quiz-restart').addEventListener('click', () => {
+        answers = [];
+        currentStep = 0;
+        showStep(0);
+      });
+    })();
+  </script>
+
+  <!-- ===== POPUP ===== -->
+  <style>
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 32, 32, 0.6);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .popup-overlay.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .popup-modal {
+      background: #fff;
+      border-radius: 24px;
+      max-width: 800px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.22);
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      animation: popupIn 0.4s cubic-bezier(0.34,1.26,0.64,1) both;
+    }
+    @keyframes popupIn {
+      from { transform: scale(0.92) translateY(12px); opacity: 0; }
+      to   { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .popup-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      font-size: 1.1rem;
+      line-height: 1;
+      cursor: pointer;
+      color: #fff;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .popup-close:hover { background: rgba(255,255,255,0.32); }
+
+    /* Left panel */
+    .popup-left {
+      background: linear-gradient(155deg, #27b2b1 0%, #1a8a89 60%, #c22392 130%);
+      padding: 3rem 2.25rem;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .popup-eyebrow {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+    .popup-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #fff;
+      margin: 0;
+    }
+    .popup-left h2 em { font-style: italic; color: #ffe98c; }
+    .popup-stat {
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+    }
+    .popup-stat__number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #ffe98c;
+      line-height: 1;
+    }
+    .popup-stat__label {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.8);
+      margin-top: 0.2rem;
+      line-height: 1.4;
+    }
+    .popup-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 0.25rem;
+    }
+    .popup-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.4;
+    }
+    .popup-bullet-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Right panel */
+    .popup-right {
+      padding: 3rem 2.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .popup-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #c22392;
+      margin: 0;
+    }
+    .popup-right h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.25;
+      margin: 0;
+    }
+    .popup-right p {
+      font-size: 0.9rem;
+      color: #6b6b6b;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .popup-cta-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.9rem 1.75rem;
+      background: #27b2b1;
+      color: #fff;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+      margin-top: 0.25rem;
+    }
+    .popup-cta-primary:hover {
+      background: #1d9190;
+      transform: translateY(-1px);
+    }
+    .popup-cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.85rem 1.75rem;
+      background: transparent;
+      color: #1a1a1a;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid #e8e8e8;
+      transition: border-color 0.2s;
+    }
+    .popup-cta-secondary:hover { border-color: #1a1a1a; }
+    .popup-dismiss {
+      background: none;
+      border: none;
+      font-size: 0.78rem;
+      color: #aaa;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      margin-top: 0.25rem;
+      align-self: flex-start;
+    }
+    .popup-dismiss:hover { color: #666; }
+    .popup-divider {
+      height: 1px;
+      background: #f0f0f0;
+      margin: 0.25rem 0;
+    }
+
+    @media (max-width: 640px) {
+      .popup-modal { grid-template-columns: 1fr; }
+      .popup-left { padding: 2rem 1.75rem; gap: 1rem; }
+      .popup-left h2 { font-size: 1.25rem; }
+      .popup-right { padding: 2rem 1.75rem; }
+    }
+  </style>
+
+  <div id="popup-overlay" class="popup-overlay" role="dialog" aria-modal="true">
+    <div class="popup-modal">
+      <button class="popup-close" onclick="closePopup()" aria-label="Close">&times;</button>
+
+      <!-- Left: Brand story panel -->
+      <div class="popup-left">
+        <p class="popup-eyebrow">Katie's #1 recommendation</p>
+        <h2>The one thing that <em>finally</em> moved the needle for me.</h2>
+        <div class="popup-stat">
+          <div class="popup-stat__number">55 lbs</div>
+          <div class="popup-stat__label">Lost in 9 months — after adding one peptide to an already-solid routine.</div>
+        </div>
+        <div class="popup-bullets">
+          <div class="popup-bullet">
+            <span class="popup-bullet-dot">✓</span>
+            <span>Energy came back within weeks</span>
+          </div>
+          <div class="popup-bullet">
+            <span class="popup-bullet-dot">✓</span>
+            <span>Inflammation dropped significantly</span>
+          </div>
+          <div class="popup-bullet">
+            <span class="popup-bullet-dot">✓</span>
+            <span>No extremes — sustainable & real</span>
+          </div>
+          <div class="popup-bullet">
+            <span class="popup-bullet-dot">✓</span>
+            <span>Built for women 40+ & perimenopause</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: CTA panel -->
+      <div class="popup-right">
+        <p class="popup-tag">Peptide Education + Products</p>
+        <h3>Ready to find your missing piece?</h3>
+        <p>I became an EllieMD affiliate because it worked for me — not the other way around. Shop the exact products I use and trust, with full transparency.</p>
+        <div class="popup-divider"></div>
+        <p style="font-size:0.82rem;color:#999;margin-bottom:-0.25rem;">Start here →</p>
+        <a href="https://www.elliemd.com/katiemiller" target="_blank" rel="noopener" class="popup-cta-primary" onclick="closeAndRemember()">Shop EllieMD with Katie →</a>
+        <a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener" class="popup-cta-secondary" onclick="closeAndRemember()">Join the free community</a>
+        <a href="https://katiemillercoaching.com" target="_blank" rel="noopener" class="popup-cta-secondary" onclick="closeAndRemember()">Join my Weekly Newsletter</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var POPUP_KEY = 'km_popup_done';
+
+      function hideOverlay() {
+        var overlay = document.getElementById('popup-overlay');
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+      }
+
+      /* X button — just hides for this visit, shows again next time */
+      window.closePopup = function() {
+        hideOverlay();
+      };
+
+      /* CTA clicks — hides and remembers so it doesn't show again */
+      window.closeAndRemember = function() {
+        hideOverlay();
+        localStorage.setItem(POPUP_KEY, '1');
+      };
+
+      if (!localStorage.getItem(POPUP_KEY)) {
+        setTimeout(function() {
+          document.getElementById('popup-overlay').classList.add('visible');
+        }, 1500);
+      }
+    })();
+  </script>
+</body>
+</html>

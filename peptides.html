@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peptides 101 — Katie Miller Wellness Coach</title>
+  <meta name="description" content="What are peptides, how do they work, and are they right for you? Katie Miller breaks it all down in plain language — no hype, no jargon, just honest education for women 40+." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── PEPTIDES PAGE ─────────────────────────────── */
+
+    .peptide-intro {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .peptide-intro p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+      margin-bottom: 1.4rem;
+    }
+
+    /* Info cards grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 4rem 0;
+    }
+
+    .info-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+    }
+
+    .info-card__icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-card__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+
+    .info-card__body {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    /* Section divider heading */
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Myth-busting rows */
+    .myth-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .myth-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .myth-item__myth {
+      background: var(--bg-soft);
+      padding: 1.5rem 1.75rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .myth-item__fact {
+      background: var(--bg);
+      padding: 1.5rem 1.75rem;
+    }
+
+    .myth-item__label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .myth-item__myth .myth-item__label { color: var(--text-muted); }
+    .myth-item__fact  .myth-item__label { color: var(--accent); }
+
+    .myth-item__text {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Who it's for list */
+    .for-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      max-width: 760px;
+      margin: 2rem auto 0;
+    }
+
+    .for-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: var(--accent-light);
+      border-radius: 14px;
+      padding: 1.1rem 1.25rem;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .for-item__check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-weight: 700;
+    }
+
+    /* Katie quote block */
+    .katie-block {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      background: var(--bg-soft);
+      border-radius: 24px;
+      padding: 3rem;
+      margin: 4rem 0;
+    }
+
+    .katie-block__photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .katie-block__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .katie-block__quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .katie-block__name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .katie-block__name span {
+      color: var(--accent);
+    }
+
+    /* EllieMD CTA box */
+    .ellie-box {
+      background: linear-gradient(135deg, #27b2b1 0%, #c22392 100%);
+      border-radius: 24px;
+      padding: 3.5rem;
+      text-align: center;
+      color: #fff;
+      margin: 4rem 0;
+    }
+
+    .ellie-box__eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 1rem;
+    }
+
+    .ellie-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .ellie-box p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    .ellie-box .btn--primary {
+      background: #fff;
+      color: #c22392;
+      border-color: #fff;
+    }
+
+    .ellie-box .btn--primary:hover {
+      background: rgba(255,255,255,0.9);
+      border-color: rgba(255,255,255,0.9);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .ellie-box .btn--outline-white {
+      border-color: rgba(255,255,255,0.45);
+    }
+
+    @media (max-width: 900px) {
+      .info-grid { grid-template-columns: 1fr; }
+      .myth-item { grid-template-columns: 1fr; }
+      .myth-item__myth { border-right: none; border-bottom: 1px solid var(--border); }
+      .for-list { grid-template-columns: 1fr; }
+      .katie-block { grid-template-columns: 1fr; text-align: center; gap: 1.5rem; }
+      .katie-block__photo { margin: 0 auto; }
+      .ellie-box { padding: 2.5rem 1.75rem; }
+    }
+    @media (max-width: 640px) {
+      .trust-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo">
+          <span class="nav__logo-name">Katie Miller</span>
+          <span class="nav__logo-sub">Wellness Coach</span>
+        </a>
+        <ul class="nav__links">
+          <li><a href="my-story.html">My Story</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="peptides.html" class="active">Peptides</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener">Community</a></li>
+          <li><a href="contact.html">Work With Me</a></li>
+          <li><a href="contact.html" class="btn-nav">Book a Session →</a></li>
+        </ul>
+        <button class="nav__hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <nav class="nav__drawer">
+    <a href="my-story.html">My Story</a>
+    <a href="programs.html">Programs</a>
+    <a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener">Peptides</a>
+    <a href="faq.html">FAQ</a>
+    <a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener">Community</a>
+    <a href="contact.html">Work With Me</a>
+    <a href="contact.html" class="btn btn--primary" style="margin-top:0.5rem;">Book a Session →</a>
+  </nav>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Peptides 101</p>
+      <h1>What they are. How they work.<br>Why women 40+ are talking about them.</h1>
+      <p>No hype. No jargon. Just honest, clear education from someone who's been through it — and seen the results firsthand.</p>
+    </div>
+  </section>
+
+  <!-- ===== TRUST BOX ===== -->
+  <section class="section" style="padding-bottom:0;">
+    <div class="container">
+      <div style="background:linear-gradient(135deg,#27b2b1 0%,#c22392 100%);border-radius:24px;padding:3rem;color:#fff;">
+        <div style="text-align:center;margin-bottom:2.25rem;">
+          <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:0.75rem;">Katie's trusted picks</p>
+          <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:#fff;margin-bottom:0.75rem;">Peptides I personally use &amp; recommend</h2>
+          <p style="color:rgba(255,255,255,0.8);font-size:1rem;line-height:1.7;max-width:520px;margin:0 auto;">I only recommend what I've researched, tested, and seen work — on myself and my clients. Choose where you want to start:</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;">
+          <a href="https://www.elliemd.com/katiemiller" target="_blank" rel="noopener" style="background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);border-radius:18px;padding:1.75rem 1.5rem;text-align:center;text-decoration:none;color:#fff;transition:background 0.2s;display:flex;flex-direction:column;align-items:center;gap:0.75rem;">
+            <span style="font-size:2rem;">🛍️</span>
+            <span style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;">Shop EllieMD</span>
+            <span style="font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.5;">Browse the exact peptide products I use and trust</span>
+            <span style="margin-top:auto;font-size:0.82rem;font-weight:700;color:#ffe98c;">Shop now →</span>
+          </a>
+          <a href="https://katiemillercoaching.com/peptide-quiz" target="_blank" rel="noopener" style="background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);border-radius:18px;padding:1.75rem 1.5rem;text-align:center;text-decoration:none;color:#fff;transition:background 0.2s;display:flex;flex-direction:column;align-items:center;gap:0.75rem;">
+            <span style="font-size:2rem;">✅</span>
+            <span style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;">Take the Peptide Quiz</span>
+            <span style="font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.5;">Find out which peptides may be right for your body and goals</span>
+            <span style="margin-top:auto;font-size:0.82rem;font-weight:700;color:#ffe98c;">Take the quiz →</span>
+          </a>
+          <a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener" style="background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);border-radius:18px;padding:1.75rem 1.5rem;text-align:center;text-decoration:none;color:#fff;transition:background 0.2s;display:flex;flex-direction:column;align-items:center;gap:0.75rem;">
+            <span style="font-size:2rem;">📖</span>
+            <span style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;">Get the Free Guide</span>
+            <span style="font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.5;">Download the Peptide 101 guide — plain language, no fluff</span>
+            <span style="margin-top:auto;font-size:0.82rem;font-weight:700;color:#ffe98c;">Get it free →</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHAT IS A PEPTIDE ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="peptide-intro">
+        <p class="section-label">Start here</p>
+        <h2 style="margin-bottom:1.5rem;">So... what exactly is a peptide?</h2>
+        <p>
+          A peptide is simply a short chain of amino acids — the same building blocks that make up the proteins your body already uses every day. Think of them as tiny messengers. Your body produces them naturally, and they play a role in everything from how your cells repair themselves to how your hormones communicate with one another.
+        </p>
+        <p>
+          Here's the thing though: as we get older — especially during perimenopause and menopause — our bodies produce fewer of these peptides. Less collagen. Less growth hormone. Slower recovery. More inflammation. And that's when a lot of women start to feel like their body is working against them, even when they're doing everything right.
+        </p>
+        <p>
+          Peptide supplementation works by replenishing or signaling certain biological processes — helping your body do more of what it's supposed to do naturally. It's not a drug. It's not a shortcut. It's support — targeted, specific, and built on real science.
+        </p>
+      </div>
+
+      <!-- 3 key concepts -->
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card__icon">🔬</div>
+          <div class="info-card__title">Naturally occurring</div>
+          <div class="info-card__body">Peptides aren't foreign to your body — your body already makes them. Supplementing is a way of replenishing what time and hormonal shifts have reduced.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card__icon">🎯</div>
+          <div class="info-card__title">Targeted support</div>
+          <div class="info-card__body">Unlike general supplements, peptides are specific. Different peptides signal different pathways — metabolism, recovery, inflammation, collagen production, and more.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card__icon">⚖️</div>
+          <div class="info-card__title">Built on research</div>
+          <div class="info-card__body">Peptides have been studied in clinical settings for decades. The science is real — which is why they're increasingly part of conversations around women's health and longevity.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW THEY WORK ===== -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">How it works</p>
+        <h2>What peptides actually do in your body</h2>
+        <p>Peptides work by binding to receptors on your cells and triggering specific biological responses. Here's what that can look like in practice:</p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card__icon">🔥</div>
+          <div class="info-card__title">Metabolism support</div>
+          <div class="info-card__body">Certain peptides signal the body to regulate appetite, improve insulin sensitivity, and support fat metabolism — especially important when hormonal shifts start slowing things down.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card__icon">⚡</div>
+          <div class="info-card__title">Energy & recovery</div>
+          <div class="info-card__body">Peptides that stimulate growth hormone production can improve sleep quality, reduce fatigue, and help muscles recover faster after training — without synthetic hormones.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card__icon">🛡️</div>
+          <div class="info-card__title">Inflammation & repair</div>
+          <div class="info-card__body">Chronic inflammation is one of the biggest hidden barriers for women in midlife. Some peptides are specifically studied for their role in reducing inflammation and supporting tissue repair.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHO IT'S FOR ===== -->
+  <section class="section">
+    <div class="container">
+      <div style="max-width:760px;margin:0 auto;">
+        <p class="section-label">Is this for me?</p>
+        <h2 style="margin-bottom:1rem;">Peptides may be worth exploring if you…</h2>
+        <p style="color:var(--text-muted);font-size:1.05rem;line-height:1.8;margin-bottom:0;">This isn't for everyone — and I'll always tell you that honestly. But if any of these feel familiar, peptides might be the missing conversation you haven't had yet.</p>
+      </div>
+
+      <div class="for-list">
+        <div class="for-item"><span class="for-item__check">✓</span>You're doing everything "right" and still not losing weight</div>
+        <div class="for-item"><span class="for-item__check">✓</span>You're in perimenopause or menopause and feel like your body changed overnight</div>
+        <div class="for-item"><span class="for-item__check">✓</span>Your energy, sleep, or recovery has declined and you can't pinpoint why</div>
+        <div class="for-item"><span class="for-item__check">✓</span>You're dealing with chronic inflammation or joint discomfort</div>
+        <div class="for-item"><span class="for-item__check">✓</span>You train consistently but aren't seeing the results you used to</div>
+        <div class="for-item"><span class="for-item__check">✓</span>You want to understand what's actually going on — not just be handed another plan</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MYTH BUSTING ===== -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Setting the record straight</p>
+        <h2>Common peptide myths — and the truth</h2>
+        <p>There's a lot of noise out there. Here's what I actually want you to know.</p>
+      </div>
+
+      <div class="myth-list">
+        <div class="myth-item">
+          <div class="myth-item__myth">
+            <p class="myth-item__label">Myth</p>
+            <p class="myth-item__text">"Peptides are just for bodybuilders or athletes."</p>
+          </div>
+          <div class="myth-item__fact">
+            <p class="myth-item__label">Truth</p>
+            <p class="myth-item__text">Most of my clients are everyday women in their 40s and 50s — not athletes. Peptides are increasingly used for metabolic health, hormonal balance, and healthy aging.</p>
+          </div>
+        </div>
+        <div class="myth-item">
+          <div class="myth-item__myth">
+            <p class="myth-item__label">Myth</p>
+            <p class="myth-item__text">"They're unsafe and unregulated."</p>
+          </div>
+          <div class="myth-item__fact">
+            <p class="myth-item__label">Truth</p>
+            <p class="myth-item__text">Quality matters enormously, which is why I only recommend EllieMD — a brand I vetted personally before becoming an affiliate. I won't recommend anything I haven't researched and used myself.</p>
+          </div>
+        </div>
+        <div class="myth-item">
+          <div class="myth-item__myth">
+            <p class="myth-item__label">Myth</p>
+            <p class="myth-item__text">"You don't need to change anything else — peptides do it all."</p>
+          </div>
+          <div class="myth-item__fact">
+            <p class="myth-item__label">Truth</p>
+            <p class="myth-item__text">Peptides work best on a solid foundation — real nutrition, consistent movement, adequate sleep. They're a powerful addition, not a replacement for the basics.</p>
+          </div>
+        </div>
+        <div class="myth-item">
+          <div class="myth-item__myth">
+            <p class="myth-item__label">Myth</p>
+            <p class="myth-item__text">"The results are just a placebo."</p>
+          </div>
+          <div class="myth-item__fact">
+            <p class="myth-item__label">Truth</p>
+            <p class="myth-item__text">I lost 55 pounds in 9 months. My clients are seeing real results. The research backs the mechanisms. This isn't wishful thinking — it's biology.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KATIE QUOTE ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="katie-block">
+        <div class="katie-block__photo">
+          <img src="images/katie-3.jpeg" alt="Katie Miller">
+        </div>
+        <div>
+          <p class="katie-block__quote">"I became an EllieMD affiliate because it worked for me — not the other way around. I'd already lost the 55 pounds before I ever thought about recommending it. That matters to me. My credibility with you matters more than any commission."</p>
+          <p class="katie-block__name">— Katie Miller &nbsp;<span>· Certified Health Coach · CPT · 20+ Years</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ELLIEMD CTA ===== -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="ellie-box">
+        <p class="ellie-box__eyebrow">Ready to explore?</p>
+        <h2>Shop the peptides I use and trust.</h2>
+        <p>I only recommend what I've personally researched and used myself. No pressure, no sales pitch — just the information and the link. You take it from there.</p>
+        <div class="btn-group" style="justify-content:center;flex-wrap:wrap;">
+          <a href="https://www.elliemd.com/katiemiller" target="_blank" rel="noopener" class="btn btn--primary">Shop EllieMD with Katie →</a>
+          <a href="https://katiemillercoaching.com/peptide-quiz" target="_blank" rel="noopener" class="btn btn--outline-white">Take the Peptide Quiz →</a>
+          <a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener" class="btn btn--outline-white">Get the Peptide 101 Guide →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BANNER ===== -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Still have questions? That's exactly what I'm here for.</h2>
+      <p>Book a 1:1 consultation and we'll talk through whether peptides make sense for your specific situation — your body, your goals, your history.</p>
+      <div class="btn-group" style="justify-content:center;">
+        <a href="contact.html" class="btn btn--primary">Book a consultation →</a>
+        <a href="faq.html" class="btn btn--outline-white">Read the FAQ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__brand-name">Katie Miller</div>
+          <div class="footer__brand-sub">Wellness Coach</div>
+        </div>
+        <ul class="footer__links">
+          <li><a href="my-story.html">My Story</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener">Peptides</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener">Community</a></li>
+          <li><a href="contact.html">Work With Me</a></li>
+        </ul>
+      </div>
+      <div class="footer__bottom">
+        © 2026 Katie Miller Wellness. All rights reserved. &nbsp;|&nbsp; Results may vary. Individual outcomes depend on effort, consistency, and individual factors. Peptide education is for informational purposes only and does not constitute medical advice. EllieMD links are affiliate links.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

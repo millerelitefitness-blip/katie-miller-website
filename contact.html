@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work With Me — Katie Miller Wellness Coach</title>
+  <meta name="description" content="Four ways to work with Katie Miller — join the $27 membership, book a $197 1:1 session, shop EllieMD peptides, or DM 'GAME ON' on Instagram. Women 40+ perimenopause coaching." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── PATHWAYS GRID ─────────────────────────────── */
+    .pathways {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .pathway {
+      border-radius: 20px;
+      padding: 2.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      transition: box-shadow 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .pathway:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+      transform: translateY(-3px);
+    }
+
+    .pathway--featured {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .pathway--elliemd {
+      background: #0f2020;
+      border-color: #0f2020;
+      color: #fff;
+    }
+
+    .pathway__icon { font-size: 2rem; }
+
+    .pathway__badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      align-self: flex-start;
+    }
+    .pathway--featured .pathway__badge { background: rgba(255,255,255,0.2); color: #fff; }
+    .pathway--elliemd .pathway__badge  { background: rgba(39,178,177,0.25); color: #8de0d4; }
+    .pathway--plain .pathway__badge    { background: var(--bg-soft); color: var(--text-muted); }
+
+    .pathway__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .pathway__price {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .pathway__price span { font-size: 0.95rem; font-weight: 400; }
+    .pathway--featured .pathway__price span { opacity: 0.75; }
+    .pathway--plain .pathway__price span    { color: var(--text-muted); }
+    .pathway--elliemd .pathway__price       { color: #8de0d4; }
+    .pathway--elliemd .pathway__price span  { color: rgba(141,224,212,0.7); }
+
+    .pathway__desc {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      flex: 1;
+    }
+    .pathway--featured .pathway__desc { color: rgba(255,255,255,0.82); }
+    .pathway--elliemd  .pathway__desc { color: rgba(255,255,255,0.65); }
+    .pathway--plain    .pathway__desc { color: var(--text-muted); }
+
+    .pathway__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: 1.5px solid;
+      transition: all 0.2s;
+      align-self: flex-start;
+      margin-top: auto;
+      cursor: pointer;
+    }
+    .pathway--featured .pathway__cta { border-color: rgba(255,255,255,0.5); color: #fff; }
+    .pathway--featured .pathway__cta:hover { border-color: #fff; background: rgba(255,255,255,0.12); }
+    .pathway--elliemd  .pathway__cta { border-color: rgba(39,178,177,0.5); color: #8de0d4; }
+    .pathway--elliemd  .pathway__cta:hover { border-color: #8de0d4; background: rgba(39,178,177,0.1); }
+    .pathway--plain    .pathway__cta { border-color: var(--border); color: var(--text); }
+    .pathway--plain    .pathway__cta:hover { border-color: var(--text); }
+
+    /* ── INSTAGRAM / DM SECTION ─────────────────────── */
+    .dm-section {
+      background: linear-gradient(135deg, #27b2b1, #c22392);
+      border-radius: 24px;
+      padding: 3.5rem;
+      text-align: center;
+      margin-bottom: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .dm-section::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 220px; height: 220px; border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+    }
+    .dm-section::after {
+      content: '';
+      position: absolute; bottom: -40px; left: -40px;
+      width: 160px; height: 160px; border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    .dm-section__inner { position: relative; z-index: 1; }
+    .dm-section__tag {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.65);
+      margin-bottom: 1rem;
+    }
+    .dm-section__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700; color: #fff;
+      margin-bottom: 0.75rem; line-height: 1.1;
+    }
+    .dm-section__title em { font-style: italic; color: #ffe98c; }
+    .dm-section__sub {
+      color: rgba(255,255,255,0.72); font-size: 1rem;
+      line-height: 1.7; max-width: 500px; margin: 0 auto 2rem;
+    }
+    .dm-section__word {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 12px;
+      padding: 0.6rem 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 700;
+      color: #ffe98c; letter-spacing: 0.08em;
+      margin-bottom: 1.75rem;
+    }
+    .dm-section__cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: #fff; color: #c22392;
+      font-size: 0.9rem; font-weight: 700;
+      padding: 0.9rem 2rem; border-radius: 100px;
+      text-decoration: none; transition: opacity 0.2s;
+    }
+    .dm-section__cta:hover { opacity: 0.9; }
+    .dm-section__handle {
+      display: block; margin-top: 1rem;
+      color: rgba(255,255,255,0.5); font-size: 0.82rem;
+    }
+
+    /* ── CONTACT FORM SECTION ───────────────────────── */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-aside h2 { margin-bottom: 1rem; }
+    .contact-aside p { color: var(--text-muted); line-height: 1.8; font-size: 1rem; margin-bottom: 1rem; }
+
+    .contact-detail-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.75rem; }
+    .contact-detail-row {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.9rem; color: var(--text-muted);
+    }
+    .contact-detail-row__icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 1rem;
+    }
+    .contact-detail-row a { color: var(--accent-dark); text-decoration: underline; }
+
+    @media (max-width: 900px) {
+      .pathways { grid-template-columns: 1fr; }
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .dm-section { padding: 2.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo">
+          <span class="nav__logo-name">Katie Miller</span>
+          <span class="nav__logo-sub">Wellness Coach</span>
+        </a>
+        <ul class="nav__links">
+          <li><a href="my-story.html">My Story</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener">Peptides</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener">Community</a></li>
+          <li><a href="contact.html">Work With Me</a></li>
+          <li><a href="contact.html" class="btn-nav">Book a Session →</a></li>
+        </ul>
+        <button class="nav__hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <nav class="nav__drawer">
+    <a href="my-story.html">My Story</a>
+    <a href="programs.html">Programs</a>
+    <a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener">Peptides</a>
+    <a href="faq.html">FAQ</a>
+    <a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener">Community</a>
+    <a href="contact.html">Work With Me</a>
+    <a href="contact.html" class="btn btn--primary" style="margin-top:0.5rem;">Book a Session →</a>
+  </nav>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Work With Me</p>
+      <h1>Ready? Here's how to start.</h1>
+      <p>Four ways to get in — pick whichever feels right for where you are today.</p>
+    </div>
+  </section>
+
+  <!-- ===== PATHWAYS ===== -->
+  <section class="section">
+    <div class="container">
+
+      <!-- Skool community banner -->
+      <a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener" style="display:block;margin-bottom:3rem;border-radius:20px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.12);">
+        <img src="images/skool-banner.png" alt="The Game On Community — Katie Miller Coaching" style="width:100%;display:block;">
+      </a>
+
+      <div class="pathways">
+
+        <!-- Membership -->
+        <div class="pathway pathway--featured">
+          <span class="pathway__badge">Most popular</span>
+          <div class="pathway__icon">🌟</div>
+          <h3 class="pathway__title">Join the Monthly Membership</h3>
+          <div class="pathway__price">$27<span>/month</span></div>
+          <p class="pathway__desc">Weekly live coaching, perimenopause education, peptide consultations, meal plans, workouts, recipe guides, and a community of women who get it — all for less than a dollar a day. Cancel anytime.</p>
+          <a href="https://buy.stripe.com/00wbIVf8x89642Z5EM5c400" target="_blank" rel="noopener" class="pathway__cta">Join the membership →</a>
+        </div>
+
+        <!-- 1:1 Session -->
+        <div class="pathway pathway--plain">
+          <span class="pathway__badge">Private · Personalized</span>
+          <div class="pathway__icon">🎯</div>
+          <h3 class="pathway__title">Book a 1:1 Consultation</h3>
+          <div class="pathway__price">$197<span> / 40-min Zoom</span></div>
+          <p class="pathway__desc">A private session focused entirely on you — your history, your hormones, your goals. You'll leave with a clear, personalized protocol and answers to the questions that have been keeping you stuck.</p>
+          <a href="mailto:katie@katiemillercoaching.com?subject=1:1 Consultation Booking" class="pathway__cta">Book your session →</a>
+        </div>
+
+        <!-- EllieMD -->
+        <a href="https://www.elliemd.com/katiemiller" target="_blank" rel="noopener" class="pathway pathway--elliemd">
+          <span class="pathway__badge">Katie's affiliate link</span>
+          <div class="pathway__icon">🧬</div>
+          <h3 class="pathway__title">Shop EllieMD Peptides</h3>
+          <div class="pathway__price">elliemd.com<span>/katiemiller</span></div>
+          <p class="pathway__desc">The peptide brand I personally use and trust. EllieMD was the missing piece in my own 55-lb transformation. Quality-controlled, research-backed, and the real deal — not gray-market products.</p>
+          <span class="pathway__cta">Shop EllieMD →</span>
+        </a>
+
+        <!-- DM on Instagram -->
+        <div class="pathway pathway--plain">
+          <span class="pathway__badge">Easiest first step</span>
+          <div class="pathway__icon">💬</div>
+          <h3 class="pathway__title">DM Me on Instagram</h3>
+          <div class="pathway__price" style="font-size:1.4rem; color:var(--accent);">Game On</div>
+          <p class="pathway__desc">Not ready to commit to anything yet? Just DM me the words "GAME ON" on Instagram. No pressure, no sales pitch — just a real conversation about where you are and what might actually help.</p>
+          <a href="https://www.instagram.com/katie_millercoaching/" target="_blank" rel="noopener" class="pathway__cta">Find me on Instagram →</a>
+        </div>
+
+      </div>
+
+      <!-- DM BANNER -->
+      <div class="dm-section">
+        <div class="dm-section__inner">
+          <p class="dm-section__tag">The easiest first step</p>
+          <h2 class="dm-section__title">Not sure where to start?<br>Just say <em>Game On.</em></h2>
+          <p class="dm-section__sub">DM me this word on Instagram. No intake forms, no commitment, no sales pitch. Just two women talking about what's actually going on and what could help.</p>
+          <div class="dm-section__word">GAME ON</div>
+          <br>
+          <a href="https://www.instagram.com/katie_millercoaching/" target="_blank" rel="noopener" class="dm-section__cta">
+            Find me on Instagram →
+          </a>
+          <span class="dm-section__handle">📸 @katie_millercoaching</span>
+        </div>
+      </div>
+
+      <!-- CONTACT FORM -->
+      <div class="contact-layout">
+
+        <div class="contact-aside">
+          <h2>Or send me a message</h2>
+          <p>Prefer email? Fill this out and I'll get back to you within 24–48 hours. Tell me what's going on and we'll figure out the best next step together.</p>
+          <p>If you're not sure which program is right for you, just say so — that's half of what I'm here for.</p>
+
+          <div class="contact-detail-list">
+            <div class="contact-detail-row">
+              <div class="contact-detail-row__icon">📧</div>
+              <a href="mailto:katie@katiemillercoaching.com">katie@katiemillercoaching.com</a>
+            </div>
+            <div class="contact-detail-row">
+              <div class="contact-detail-row__icon">📱</div>
+              <a href="tel:5133275999">(513) 327-5999</a>
+            </div>
+            <div class="contact-detail-row">
+              <div class="contact-detail-row__icon">🧬</div>
+              <a href="https://www.elliemd.com/katiemiller" target="_blank" rel="noopener">elliemd.com/katiemiller</a>
+            </div>
+            <div class="contact-detail-row">
+              <div class="contact-detail-row__icon">⏱</div>
+              <span>Response within 24–48 hours</span>
+            </div>
+            <div class="contact-detail-row">
+              <div class="contact-detail-row__icon">🌎</div>
+              <span>Remote coaching — available worldwide</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="form" action="mailto:katie@katiemillercoaching.com" method="POST" enctype="text/plain">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first-name">First name</label>
+              <input type="text" id="first-name" name="first-name" placeholder="Your first name" required />
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last name</label>
+              <input type="text" id="last-name" name="last-name" placeholder="Your last name" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="interest">What are you interested in?</label>
+            <select id="interest" name="interest">
+              <option value="">— Choose one —</option>
+              <option value="membership">Monthly Membership ($27/mo)</option>
+              <option value="consult">1:1 Consultation ($197)</option>
+              <option value="elliemd">EllieMD peptides</option>
+              <option value="unsure">Not sure yet — I need help figuring it out</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="situation">Tell me what's going on</label>
+            <textarea id="situation" name="situation" placeholder="What have you tried? What feels stuck? What do you want to feel like? The more you share, the more I can help…" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="heard">How did you find me?</label>
+            <input type="text" id="heard" name="heard" placeholder="Instagram, a friend, Google…" />
+          </div>
+
+          <!-- Hidden field so you know where submissions came from -->
+          <input type="hidden" name="_subject" value="New inquiry from katiemillerwellness.com" />
+
+          <button type="submit" class="btn btn--primary" style="align-self:flex-start; margin-top:0.5rem;">
+            Send my message →
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__brand-name">Katie Miller</div>
+          <div class="footer__brand-sub">Wellness Coach</div>
+        </div>
+        <ul class="footer__links">
+          <li><a href="my-story.html">My Story</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener">Peptides</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener">Community</a></li>
+          <li><a href="contact.html">Work With Me</a></li>
+        </ul>
+      </div>
+      <div class="footer__bottom">
+        © 2026 Katie Miller Wellness. All rights reserved. &nbsp;|&nbsp; Results may vary. Individual outcomes depend on effort, consistency, and individual factors. Peptide education is for informational purposes only and does not constitute medical advice. EllieMD links are affiliate links.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

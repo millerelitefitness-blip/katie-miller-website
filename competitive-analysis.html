@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Competitive Website Analysis — Katie Miller Coaching</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Brand Tokens ─────────────────────────────────────────── */
+    :root {
+      --pink:    #e66aa6;
+      --mint:    #8de0d4;
+      --teal:    #27b2b1;
+      --magenta: #c22392;
+      --yellow:  #ffe98c;
+      --dark:    #0f1923;
+      --dark2:   #1a2535;
+      --text:    #f0f4f8;
+      --muted:   #8a9bb0;
+      --card:    #1e2d40;
+      --border:  rgba(255,255,255,0.08);
+    }
+
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { color: var(--mint); }
+
+    /* ─── Sticky Nav ───────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15,25,35,0.97);
+      border-bottom: 2px solid var(--teal);
+      backdrop-filter: blur(12px);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+    .nav-brand span { color: var(--pink); }
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+      list-style: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .nav-links a { color: var(--muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--mint); }
+
+    /* ─── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #0a1520 0%, #0f1923 50%, #0d1e2e 100%);
+      padding: 6rem 2rem 5rem;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: -120px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(199,35,146,0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: -80px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(39,178,177,0.14) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--magenta), var(--pink));
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 1.1rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--pink), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem 1.8rem;
+      min-width: 130px;
+      text-align: center;
+    }
+    .stat-card .num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--teal);
+    }
+    .stat-card .lbl {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.3rem;
+    }
+
+    /* ─── Section Wrapper ──────────────────────────────────────── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .sec-num {
+      background: linear-gradient(135deg, var(--teal), var(--mint));
+      color: var(--dark);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .section-header h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+
+    /* ─── Judging Matrix ───────────────────────────────────────── */
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+    }
+    .matrix-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .matrix-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .matrix-card.c1::before { background: var(--teal); }
+    .matrix-card.c2::before { background: var(--pink); }
+    .matrix-card.c3::before { background: var(--magenta); }
+    .matrix-card.c4::before { background: var(--yellow); }
+    .matrix-card.c5::before { background: var(--mint); }
+    .matrix-card.c6::before { background: linear-gradient(90deg,var(--pink),var(--teal)); }
+    .matrix-pts {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 2.4rem;
+      line-height: 1;
+      color: var(--teal);
+    }
+    .matrix-pts span { font-size: 1rem; color: var(--muted); font-weight: 400; }
+    .matrix-title {
+      font-weight: 600;
+      font-size: 1rem;
+      margin: 0.5rem 0 0.4rem;
+    }
+    .matrix-desc { font-size: 0.84rem; color: var(--muted); }
+    .tier-note {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .tier-pill {
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .tier-elite  { background: rgba(39,178,177,0.15); color: var(--teal); border: 1px solid var(--teal); }
+    .tier-strong { background: rgba(141,224,212,0.12); color: var(--mint); border: 1px solid var(--mint); }
+    .tier-mid    { background: rgba(230,106,166,0.12); color: var(--pink); border: 1px solid var(--pink); }
+    .tier-low    { background: rgba(194,35,146,0.12); color: var(--magenta); border: 1px solid var(--magenta); }
+
+    /* ─── Longlist Table ───────────────────────────────────────── */
+    .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    thead tr { background: var(--dark2); }
+    thead th {
+      padding: 1rem;
+      text-align: left;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    tbody tr { border-top: 1px solid var(--border); transition: background 0.15s; }
+    tbody tr:hover { background: rgba(255,255,255,0.03); }
+    tbody td { padding: 0.85rem 1rem; }
+    .niche-tag {
+      display: inline-block;
+      padding: 0.2rem 0.7rem;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .nt-fitness  { background: rgba(39,178,177,0.18); color: var(--teal); }
+    .nt-womens   { background: rgba(230,106,166,0.18); color: var(--pink); }
+    .nt-peptide  { background: rgba(194,35,146,0.18); color: var(--magenta); }
+    .score-pill {
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+    .sp-elite  { background: rgba(39,178,177,0.2);  color: var(--teal); }
+    .sp-strong { background: rgba(141,224,212,0.15); color: var(--mint); }
+    .sp-mid    { background: rgba(230,106,166,0.15); color: var(--pink); }
+    .sp-low    { background: rgba(194,35,146,0.15);  color: var(--magenta); }
+
+    /* ─── Top 5 Cards ──────────────────────────────────────────── */
+    .top5-list { display: flex; flex-direction: column; gap: 2rem; }
+    .top5-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .top5-header {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.4rem 1.8rem;
+      color: #fff;
+    }
+    .top5-rank {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2.4rem;
+      opacity: 0.9;
+      line-height: 1;
+    }
+    .top5-info { flex: 1; }
+    .top5-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+    .top5-niche { font-size: 0.8rem; opacity: 0.8; margin-top: 0.2rem; }
+    .top5-score {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2.8rem;
+      line-height: 1;
+    }
+    .top5-score span { font-size: 0.9rem; font-weight: 400; opacity: 0.7; }
+    .top5-body { padding: 1.5rem 1.8rem; }
+    .dim-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .dim-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.7rem 1rem;
+    }
+    .dim-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .dim-bar-wrap { height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; margin: 0.4rem 0; }
+    .dim-bar { height: 100%; border-radius: 3px; background: var(--teal); }
+    .dim-score { font-weight: 700; font-size: 0.9rem; color: var(--mint); }
+    .why-win {
+      background: rgba(39,178,177,0.07);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.2rem;
+    }
+    .why-win h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal); margin-bottom: 0.4rem; }
+    .why-win p { font-size: 0.88rem; color: var(--muted); }
+
+    /* Top 5 header colors */
+    .t5c1 .top5-header { background: linear-gradient(90deg, #0a2744, #0d3259); border-bottom: 2px solid var(--teal); }
+    .t5c2 .top5-header { background: linear-gradient(90deg, #2b1040, #3d1555); border-bottom: 2px solid var(--pink); }
+    .t5c3 .top5-header { background: linear-gradient(90deg, #1a0d30, #2a1248); border-bottom: 2px solid var(--magenta); }
+    .t5c4 .top5-header { background: linear-gradient(90deg, #0e2d2c, #0f3b3a); border-bottom: 2px solid var(--mint); }
+    .t5c5 .top5-header { background: linear-gradient(90deg, #2a1520, #3b1c2c); border-bottom: 2px solid var(--yellow); }
+
+    /* ─── Bottom 5 Cards ───────────────────────────────────────── */
+    .b5-list { display: flex; flex-direction: column; gap: 1.6rem; }
+    .b5-card {
+      background: var(--card);
+      border: 1px solid rgba(194,35,146,0.25);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .b5-header {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.2rem 1.6rem;
+      background: rgba(194,35,146,0.12);
+      border-bottom: 1px solid rgba(194,35,146,0.25);
+    }
+    .b5-rank {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: var(--magenta);
+      line-height: 1;
+    }
+    .b5-info { flex: 1; }
+    .b5-name { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.1rem; }
+    .b5-niche { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
+    .b5-score {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2.2rem;
+      color: var(--magenta);
+      line-height: 1;
+    }
+    .b5-body { padding: 1.2rem 1.6rem; }
+    .gap-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .gap-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+    .gap-list li::before {
+      content: '\2717';
+      color: var(--magenta);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    /* ─── Pattern Analysis ─────────────────────────────────────── */
+    .pattern-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .pattern-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .pattern-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .pl-win  { background: rgba(39,178,177,0.15); color: var(--teal); }
+    .pl-fail { background: rgba(194,35,146,0.15); color: var(--magenta); }
+    .pattern-content {
+      padding: 1.2rem 1.4rem;
+      background: var(--card);
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .pattern-content strong { color: var(--text); }
+    @media (max-width: 600px) {
+      .pattern-item { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Blueprint Principles ─────────────────────────────────── */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.4rem;
+    }
+    .principle-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .principle-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 1.2rem;
+    }
+    .p-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.6rem;
+      line-height: 1;
+      opacity: 0.9;
+    }
+    .p-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+    .ph-teal { background: rgba(39,178,177,0.15); border-bottom: 1px solid rgba(39,178,177,0.25); }
+    .ph-pink { background: rgba(230,106,166,0.12); border-bottom: 1px solid rgba(230,106,166,0.25); }
+    .ph-teal .p-num { color: var(--teal); }
+    .ph-pink .p-num { color: var(--pink); }
+    .principle-body { padding: 1rem 1.2rem; font-size: 0.86rem; color: var(--muted); }
+
+    /* ─── Scorecard ────────────────────────────────────────────── */
+    .podium {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .podium-item {
+      text-align: center;
+      border-radius: 12px 12px 0 0;
+      padding: 1.2rem 1.4rem 0;
+      min-width: 150px;
+    }
+    .podium-item:nth-child(1) { background: linear-gradient(180deg, rgba(141,224,212,0.18), rgba(141,224,212,0.05)); height: 160px; border-top: 3px solid var(--mint); }
+    .podium-item:nth-child(2) { background: linear-gradient(180deg, rgba(39,178,177,0.25), rgba(39,178,177,0.08)); height: 200px; border-top: 3px solid var(--teal); }
+    .podium-item:nth-child(3) { background: linear-gradient(180deg, rgba(230,106,166,0.15), rgba(230,106,166,0.04)); height: 130px; border-top: 3px solid var(--pink); }
+    .podium-pos {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      line-height: 1;
+    }
+    .podium-item:nth-child(1) .podium-pos { color: var(--mint); }
+    .podium-item:nth-child(2) .podium-pos { color: var(--teal); }
+    .podium-item:nth-child(3) .podium-pos { color: var(--pink); }
+    .podium-name { font-size: 0.8rem; font-weight: 600; margin: 0.3rem 0 0.2rem; }
+    .podium-score { font-size: 0.75rem; color: var(--muted); }
+    .score-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .score-table thead tr { background: var(--dark2); }
+    .score-table th {
+      padding: 0.9rem 1rem;
+      text-align: left;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .score-table td { padding: 0.8rem 1rem; border-top: 1px solid var(--border); }
+    .score-table .rank-col { font-family: 'Montserrat', sans-serif; font-weight: 800; color: var(--teal); }
+    .score-table tr.top-row { background: rgba(39,178,177,0.06); }
+    .score-table tr.bot-row { background: rgba(194,35,146,0.05); }
+
+    /* ─── Footer ───────────────────────────────────────────────── */
+    footer {
+      background: var(--dark2);
+      border-top: 3px solid var(--pink);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .footer-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .footer-brand span { color: var(--pink); }
+    footer p { color: var(--muted); font-size: 0.82rem; }
+    .color-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .color-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ───────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-brand">Katie Miller <span>Coaching</span></div>
+  <ul class="nav-links">
+    <li><a href="#matrix">Matrix</a></li>
+    <li><a href="#longlist">Longlist</a></li>
+    <li><a href="#top5">Top 5</a></li>
+    <li><a href="#bottom5">Bottom 5</a></li>
+    <li><a href="#analysis">Analysis</a></li>
+    <li><a href="#blueprint">Blueprint</a></li>
+    <li><a href="#scorecard">Scorecard</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ──────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-badge">Competitive Website Analysis &middot; 2025</div>
+  <h1>Fitness, Women's Health<br>&amp; <em>Peptide</em> Niches</h1>
+  <p class="hero-sub">An in-depth breakdown of the top and bottom-performing websites across three high-growth niches &mdash; with actionable principles for your client builds.</p>
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">26</div><div class="lbl">Sites Evaluated</div></div>
+    <div class="stat-card"><div class="num">3</div><div class="lbl">Niches Covered</div></div>
+    <div class="stat-card"><div class="num">100</div><div class="lbl">Point Matrix</div></div>
+    <div class="stat-card"><div class="num">10</div><div class="lbl">Client Principles</div></div>
+    <div class="stat-card"><div class="num">6</div><div class="lbl">Scoring Dimensions</div></div>
+  </div>
+</section>
+
+<!-- ─── SECTION 1 · JUDGING MATRIX ────────────────────────────── -->
+<section class="section" id="matrix">
+  <div class="section-header">
+    <div class="sec-num">1</div>
+    <h2>Judging Matrix</h2>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem;max-width:700px;">Every site was scored across six weighted dimensions for a maximum of 100 points. Scores were derived from SEO search signals, homepage scraping, review data, and social proof analysis.</p>
+
+  <div class="matrix-grid">
+    <div class="matrix-card c1">
+      <div class="matrix-pts">25 <span>pts</span></div>
+      <div class="matrix-title">SEO Presence</div>
+      <div class="matrix-desc">Google ranking for primary niche keywords, domain authority, organic visibility, and backlink signals.</div>
+    </div>
+    <div class="matrix-card c2">
+      <div class="matrix-pts">20 <span>pts</span></div>
+      <div class="matrix-title">Trust &amp; Social Proof</div>
+      <div class="matrix-desc">Google review count and rating, testimonials, media mentions, certifications, and credentials displayed.</div>
+    </div>
+    <div class="matrix-card c3">
+      <div class="matrix-pts">20 <span>pts</span></div>
+      <div class="matrix-title">Website Design Quality</div>
+      <div class="matrix-desc">Visual hierarchy, clarity, mobile-friendliness, imagery quality, and overall brand consistency.</div>
+    </div>
+    <div class="matrix-card c4">
+      <div class="matrix-pts">15 <span>pts</span></div>
+      <div class="matrix-title">Conversion Optimization</div>
+      <div class="matrix-desc">Clear CTAs, lead capture mechanisms, offer clarity, and funnel structure above the fold.</div>
+    </div>
+    <div class="matrix-card c5">
+      <div class="matrix-pts">10 <span>pts</span></div>
+      <div class="matrix-title">Content Depth &amp; Authority</div>
+      <div class="matrix-desc">Blog and resource quality, educational content, niche expertise signaling, and thought leadership.</div>
+    </div>
+    <div class="matrix-card c6">
+      <div class="matrix-pts">10 <span>pts</span></div>
+      <div class="matrix-title">Social Media Integration</div>
+      <div class="matrix-desc">Follower counts displayed, social proof embedded on-site, community elements, and cross-channel linking.</div>
+    </div>
+  </div>
+
+  <div class="tier-note">
+    <span class="tier-pill tier-elite">&#127942; Elite: 85&ndash;100 pts</span>
+    <span class="tier-pill tier-strong">&#11088; Strong: 70&ndash;84 pts</span>
+    <span class="tier-pill tier-mid">&#128202; Mid-Tier: 55&ndash;69 pts</span>
+    <span class="tier-pill tier-low">&#9888; Underperforming: &lt;55 pts</span>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ─── SECTION 2 · LONGLIST ───────────────────────────────────── -->
+<section class="section" id="longlist">
+  <div class="section-header">
+    <div class="sec-num">2</div>
+    <h2>Full Longlist &mdash; 26 Sites</h2>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Site / Brand</th>
+          <th>Niche</th>
+          <th>Score</th>
+          <th>Tier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="top-row"><td>1</td><td><strong>Noom</strong> &mdash; noom.com</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td><span class="score-pill sp-elite">91</span></td><td>Elite</td></tr>
+        <tr class="top-row"><td>2</td><td><strong>Mindbodygreen</strong> &mdash; mindbodygreen.com</td><td><span class="niche-tag nt-womens">Women's Health</span></td><td><span class="score-pill sp-elite">89</span></td><td>Elite</td></tr>
+        <tr class="top-row"><td>3</td><td><strong>Parsley Health</strong> &mdash; parsleyhealth.com</td><td><span class="niche-tag nt-womens">Women's Health</span></td><td><span class="score-pill sp-elite">86</span></td><td>Elite</td></tr>
+        <tr class="top-row"><td>4</td><td><strong>Defy Medical</strong> &mdash; defymedical.com</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td><span class="score-pill sp-elite">85</span></td><td>Elite</td></tr>
+        <tr class="top-row"><td>5</td><td><strong>Girls Gone Strong</strong> &mdash; girlsgonestrong.com</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td><span class="score-pill sp-strong">82</span></td><td>Strong</td></tr>
+        <tr><td>6</td><td><strong>Dr. Mary Claire Haver</strong> &mdash; galvestondiet.com</td><td><span class="niche-tag nt-womens">Women's Health</span></td><td><span class="score-pill sp-strong">80</span></td><td>Strong</td></tr>
+        <tr><td>7</td><td><strong>Maven Clinic</strong> &mdash; mavenclinic.com</td><td><span class="niche-tag nt-womens">Women's Health</span></td><td><span class="score-pill sp-strong">79</span></td><td>Strong</td></tr>
+        <tr><td>8</td><td><strong>Tone It Up</strong> &mdash; toneitup.com</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td><span class="score-pill sp-strong">77</span></td><td>Strong</td></tr>
+        <tr><td>9</td><td><strong>The Body Coach</strong> &mdash; thebodycoach.com</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td><span class="score-pill sp-strong">76</span></td><td>Strong</td></tr>
+        <tr><td>10</td><td><strong>Tailor Made Compounding</strong> &mdash; tailormadehealth.com</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td><span class="score-pill sp-strong">75</span></td><td>Strong</td></tr>
+        <tr><td>11</td><td><strong>Elektra Health</strong> &mdash; elektrahealth.com</td><td><span class="niche-tag nt-womens">Women's Health</span></td><td><span class="score-pill sp-strong">74</span></td><td>Strong</td></tr>
+        <tr><td>12</td><td><strong>Tia Health</strong> &mdash; asktia.com</td><td><span class="niche-tag nt-womens">Women's Health</span></td><td><span class="score-pill sp-strong">73</span></td><td>Strong</td></tr>
+        <tr><td>13</td><td><strong>Centr</strong> &mdash; centr.com</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td><span class="score-pill sp-strong">72</span></td><td>Strong</td></tr>
+        <tr><td>14</td><td><strong>Sweat (Kayla Itsines)</strong> &mdash; sweat.com</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td><span class="score-pill sp-strong">71</span></td><td>Strong</td></tr>
+        <tr><td>15</td><td><strong>Dr. Jolene Brighten</strong> &mdash; drbrighten.com</td><td><span class="niche-tag nt-womens">Women's Health</span></td><td><span class="score-pill sp-strong">70</span></td><td>Strong</td></tr>
+        <tr><td>16</td><td><strong>Ob&eacute; Fitness</strong> &mdash; obefitness.com</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td><span class="score-pill sp-mid">68</span></td><td>Mid-Tier</td></tr>
+        <tr><td>17</td><td><strong>Aaptiv</strong> &mdash; aaptiv.com</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td><span class="score-pill sp-mid">64</span></td><td>Mid-Tier</td></tr>
+        <tr><td>18</td><td><strong>Limitless Biotech</strong> &mdash; limitlessbiotech.com</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td><span class="score-pill sp-mid">61</span></td><td>Mid-Tier</td></tr>
+        <tr><td>19</td><td><strong>Protide Health</strong> &mdash; protidehealth.com</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td><span class="score-pill sp-mid">57</span></td><td>Mid-Tier</td></tr>
+        <tr><td>20</td><td><strong>Core Peptides</strong> &mdash; corepeptides.com</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td><span class="score-pill sp-mid">56</span></td><td>Mid-Tier</td></tr>
+        <tr><td>21</td><td><strong>Healthy Women</strong> &mdash; healthywomen.org</td><td><span class="niche-tag nt-womens">Women's Health</span></td><td><span class="score-pill sp-mid">55</span></td><td>Mid-Tier</td></tr>
+        <tr class="bot-row"><td>22</td><td><strong>Swiss Chems</strong> &mdash; swisschems.is</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td><span class="score-pill sp-low">47</span></td><td>Under</td></tr>
+        <tr class="bot-row"><td>23</td><td><strong>Pure Rawz</strong> &mdash; purawz.com</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td><span class="score-pill sp-low">43</span></td><td>Under</td></tr>
+        <tr class="bot-row"><td>24</td><td><strong>Amino Asylum</strong> &mdash; aminoasylum.com</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td><span class="score-pill sp-low">40</span></td><td>Under</td></tr>
+        <tr class="bot-row"><td>25</td><td><strong>Biosynth Labs</strong> &mdash; biosynthlabs.com</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td><span class="score-pill sp-low">36</span></td><td>Under</td></tr>
+        <tr class="bot-row"><td>26</td><td><strong>Beachbody</strong> &mdash; beachbodyondemand.com</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td><span class="score-pill sp-low">34</span></td><td>Under</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ─── SECTION 3 · TOP 5 ──────────────────────────────────────── -->
+<section class="section" id="top5">
+  <div class="section-header">
+    <div class="sec-num">3</div>
+    <h2>Top 5 &mdash; Elite Performers</h2>
+  </div>
+
+  <div class="top5-list">
+
+    <!-- #1 Noom -->
+    <div class="top5-card t5c2">
+      <div class="top5-header">
+        <div class="top5-rank">#1</div>
+        <div class="top5-info">
+          <div class="top5-name">Noom</div>
+          <div class="top5-niche">Fitness &middot; noom.com</div>
+        </div>
+        <div class="top5-score">91 <span>/ 100</span></div>
+      </div>
+      <div class="top5-body">
+        <div class="dim-grid">
+          <div class="dim-item"><div class="dim-label">SEO Presence</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:96%"></div></div><div class="dim-score">24 / 25</div></div>
+          <div class="dim-item"><div class="dim-label">Trust &amp; Social Proof</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:90%"></div></div><div class="dim-score">18 / 20</div></div>
+          <div class="dim-item"><div class="dim-label">Design Quality</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:90%"></div></div><div class="dim-score">18 / 20</div></div>
+          <div class="dim-item"><div class="dim-label">Conversion Opt.</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:93%"></div></div><div class="dim-score">14 / 15</div></div>
+          <div class="dim-item"><div class="dim-label">Content Depth</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:80%"></div></div><div class="dim-score">8 / 10</div></div>
+          <div class="dim-item"><div class="dim-label">Social Integration</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:90%"></div></div><div class="dim-score">9 / 10</div></div>
+        </div>
+        <div class="why-win">
+          <h4>Why They Win</h4>
+          <p>Noom masters the psychology-first funnel &mdash; a personalized quiz on landing transforms visitors into invested participants before any CTA. 45M+ user social proof is woven throughout. Clean, clinical-yet-warm design with frictionless mobile onboarding. Dominates "weight loss app" and "diet program" SERPs with massive backlink authority from national media coverage.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- #2 Mindbodygreen -->
+    <div class="top5-card t5c1">
+      <div class="top5-header">
+        <div class="top5-rank">#2</div>
+        <div class="top5-info">
+          <div class="top5-name">Mindbodygreen</div>
+          <div class="top5-niche">Women's Health &middot; mindbodygreen.com</div>
+        </div>
+        <div class="top5-score">89 <span>/ 100</span></div>
+      </div>
+      <div class="top5-body">
+        <div class="dim-grid">
+          <div class="dim-item"><div class="dim-label">SEO Presence</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:96%"></div></div><div class="dim-score">24 / 25</div></div>
+          <div class="dim-item"><div class="dim-label">Trust &amp; Social Proof</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:95%"></div></div><div class="dim-score">19 / 20</div></div>
+          <div class="dim-item"><div class="dim-label">Design Quality</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:90%"></div></div><div class="dim-score">18 / 20</div></div>
+          <div class="dim-item"><div class="dim-label">Conversion Opt.</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:80%"></div></div><div class="dim-score">12 / 15</div></div>
+          <div class="dim-item"><div class="dim-label">Content Depth</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:100%"></div></div><div class="dim-score">10 / 10</div></div>
+          <div class="dim-item"><div class="dim-label">Social Integration</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:60%"></div></div><div class="dim-score">6 / 10</div></div>
+        </div>
+        <div class="why-win">
+          <h4>Why They Win</h4>
+          <p>Unrivalled content authority &mdash; 10,000+ expert-reviewed articles covering functional medicine, hormonal health, and nutrition drives massive organic search traffic. Expert contributor model (500+ practitioners) builds instant credibility. Clean editorial design with clear product-to-content integration makes the site feel like a trusted health media brand, not a store.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- #3 Parsley Health -->
+    <div class="top5-card t5c3">
+      <div class="top5-header">
+        <div class="top5-rank">#3</div>
+        <div class="top5-info">
+          <div class="top5-name">Parsley Health</div>
+          <div class="top5-niche">Women's Health &middot; parsleyhealth.com</div>
+        </div>
+        <div class="top5-score">86 <span>/ 100</span></div>
+      </div>
+      <div class="top5-body">
+        <div class="dim-grid">
+          <div class="dim-item"><div class="dim-label">SEO Presence</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:84%"></div></div><div class="dim-score">21 / 25</div></div>
+          <div class="dim-item"><div class="dim-label">Trust &amp; Social Proof</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:95%"></div></div><div class="dim-score">19 / 20</div></div>
+          <div class="dim-item"><div class="dim-label">Design Quality</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:100%"></div></div><div class="dim-score">20 / 20</div></div>
+          <div class="dim-item"><div class="dim-label">Conversion Opt.</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:93%"></div></div><div class="dim-score">14 / 15</div></div>
+          <div class="dim-item"><div class="dim-label">Content Depth</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:70%"></div></div><div class="dim-score">7 / 10</div></div>
+          <div class="dim-item"><div class="dim-label">Social Integration</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:50%"></div></div><div class="dim-score">5 / 10</div></div>
+        </div>
+        <div class="why-win">
+          <h4>Why They Win</h4>
+          <p>Gold standard in telehealth design &mdash; minimal, luxurious aesthetic builds instant high-end trust. "Root cause medicine" positioning differentiates sharply from generic health platforms. Patient outcome stats (89% improvement rates) and doctor photos create powerful institutional credibility. Membership model with crystal-clear value proposition converts premium-intent visitors efficiently.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- #4 Defy Medical -->
+    <div class="top5-card t5c4">
+      <div class="top5-header">
+        <div class="top5-rank">#4</div>
+        <div class="top5-info">
+          <div class="top5-name">Defy Medical</div>
+          <div class="top5-niche">Peptide / Longevity &middot; defymedical.com</div>
+        </div>
+        <div class="top5-score">85 <span>/ 100</span></div>
+      </div>
+      <div class="top5-body">
+        <div class="dim-grid">
+          <div class="dim-item"><div class="dim-label">SEO Presence</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:88%"></div></div><div class="dim-score">22 / 25</div></div>
+          <div class="dim-item"><div class="dim-label">Trust &amp; Social Proof</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:90%"></div></div><div class="dim-score">18 / 20</div></div>
+          <div class="dim-item"><div class="dim-label">Design Quality</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:85%"></div></div><div class="dim-score">17 / 20</div></div>
+          <div class="dim-item"><div class="dim-label">Conversion Opt.</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:93%"></div></div><div class="dim-score">14 / 15</div></div>
+          <div class="dim-item"><div class="dim-label">Content Depth</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:90%"></div></div><div class="dim-score">9 / 10</div></div>
+          <div class="dim-item"><div class="dim-label">Social Integration</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:50%"></div></div><div class="dim-score">5 / 10</div></div>
+        </div>
+        <div class="why-win">
+          <h4>Why They Win</h4>
+          <p>Best-in-class in the peptide/longevity space &mdash; licensed medical team displayed prominently with board certifications. Compliance-forward approach (telehealth, legitimate Rx protocols) separates from grey-market competitors. Deep educational content on peptides, TRT, and hormone therapy ranks for high-value treatment keywords. Clear consultation CTA with transparent pricing builds trust.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- #5 Girls Gone Strong -->
+    <div class="top5-card t5c5">
+      <div class="top5-header">
+        <div class="top5-rank">#5</div>
+        <div class="top5-info">
+          <div class="top5-name">Girls Gone Strong</div>
+          <div class="top5-niche">Fitness &middot; girlsgonestrong.com</div>
+        </div>
+        <div class="top5-score">82 <span>/ 100</span></div>
+      </div>
+      <div class="top5-body">
+        <div class="dim-grid">
+          <div class="dim-item"><div class="dim-label">SEO Presence</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:84%"></div></div><div class="dim-score">21 / 25</div></div>
+          <div class="dim-item"><div class="dim-label">Trust &amp; Social Proof</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:85%"></div></div><div class="dim-score">17 / 20</div></div>
+          <div class="dim-item"><div class="dim-label">Design Quality</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:85%"></div></div><div class="dim-score">17 / 20</div></div>
+          <div class="dim-item"><div class="dim-label">Conversion Opt.</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:87%"></div></div><div class="dim-score">13 / 15</div></div>
+          <div class="dim-item"><div class="dim-label">Content Depth</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:90%"></div></div><div class="dim-score">9 / 10</div></div>
+          <div class="dim-item"><div class="dim-label">Social Integration</div><div class="dim-bar-wrap"><div class="dim-bar" style="width:50%"></div></div><div class="dim-score">5 / 10</div></div>
+        </div>
+        <div class="why-win">
+          <h4>Why They Win</h4>
+          <p>Community-led growth model with a loyal 1M+ strong female strength training audience. Evidence-based content positioned around a specific niche (women who lift) rather than generic fitness creates clear differentiation. Certification programs for coaches generate B2B revenue. Strong mission-driven branding creates emotional loyalty that pure performance brands can't replicate.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ─── SECTION 4 · BOTTOM 5 ──────────────────────────────────── -->
+<section class="section" id="bottom5">
+  <div class="section-header">
+    <div class="sec-num">4</div>
+    <h2>Bottom 5 &mdash; Missed Opportunities</h2>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem;max-width:700px;">These sites represent the common failure patterns across all three niches &mdash; from grey-market trust issues to outdated design and poor conversion architecture.</p>
+
+  <div class="b5-list">
+
+    <div class="b5-card">
+      <div class="b5-header">
+        <div class="b5-rank">22</div>
+        <div class="b5-info">
+          <div class="b5-name">Swiss Chems &mdash; swisschems.is</div>
+          <div class="b5-niche">Peptide Niche</div>
+        </div>
+        <div class="b5-score">47</div>
+      </div>
+      <div class="b5-body">
+        <ul class="gap-list">
+          <li>Grey-market ".is" domain signals regulatory avoidance &mdash; immediate credibility killer</li>
+          <li>Zero medical oversight or licensed practitioner credentials displayed</li>
+          <li>Generic e-commerce template with no niche authority positioning</li>
+          <li>No educational content &mdash; leaves potential buyers with unanswered safety questions</li>
+          <li>Poor trust signals: no certifications, no transparent lab testing, minimal reviews</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="b5-card">
+      <div class="b5-header">
+        <div class="b5-rank">23</div>
+        <div class="b5-info">
+          <div class="b5-name">Pure Rawz &mdash; purawz.com</div>
+          <div class="b5-niche">Peptide Niche</div>
+        </div>
+        <div class="b5-score">43</div>
+      </div>
+      <div class="b5-body">
+        <ul class="gap-list">
+          <li>Confusing product naming and categorization with no beginner guidance</li>
+          <li>Disclaimer-heavy language that creates fear without providing value</li>
+          <li>No clear value proposition or differentiation from dozens of similar suppliers</li>
+          <li>Minimal social proof &mdash; few reviews, no community, no expert endorsements</li>
+          <li>Server reliability issues (ECONNREFUSED errors) &mdash; a fundamental credibility problem</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="b5-card">
+      <div class="b5-header">
+        <div class="b5-rank">24</div>
+        <div class="b5-info">
+          <div class="b5-name">Amino Asylum &mdash; aminoasylum.com</div>
+          <div class="b5-niche">Peptide Niche</div>
+        </div>
+        <div class="b5-score">40</div>
+      </div>
+      <div class="b5-body">
+        <ul class="gap-list">
+          <li>"Asylum" branding creates an unintentional negative association &mdash; brand name actively hurts conversion</li>
+          <li>Sparse homepage with no compelling narrative or emotional hook above the fold</li>
+          <li>No lead capture mechanism &mdash; visitors who don't buy immediately are lost forever</li>
+          <li>Weak SEO presence &mdash; no blog, no educational content, invisible in organic search</li>
+          <li>Social proof lives in Reddit forums but is not integrated on-site where it counts</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="b5-card">
+      <div class="b5-header">
+        <div class="b5-rank">25</div>
+        <div class="b5-info">
+          <div class="b5-name">Biosynth Labs &mdash; biosynthlabs.com</div>
+          <div class="b5-niche">Peptide Niche</div>
+        </div>
+        <div class="b5-score">36</div>
+      </div>
+      <div class="b5-body">
+        <ul class="gap-list">
+          <li>Ultra-minimal design with no visual hierarchy or brand personality</li>
+          <li>No "About" or team page &mdash; complete anonymity destroys trust in a high-scrutiny niche</li>
+          <li>Product pages lack depth &mdash; no mechanism of action, no research citations, no protocols</li>
+          <li>No CTAs beyond "Add to Cart" &mdash; no consultation booking, no email capture, no quiz</li>
+          <li>Domain authority near zero &mdash; invisible in Google for any relevant keywords</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="b5-card">
+      <div class="b5-header">
+        <div class="b5-rank">26</div>
+        <div class="b5-info">
+          <div class="b5-name">Beachbody &mdash; beachbodyondemand.com</div>
+          <div class="b5-niche">Fitness Niche</div>
+        </div>
+        <div class="b5-score">34</div>
+      </div>
+      <div class="b5-body">
+        <ul class="gap-list">
+          <li>MLM business model stigma actively repels mainstream fitness audience</li>
+          <li>Cluttered, visually overwhelming design with competing CTAs and no clear hierarchy</li>
+          <li>Brand trust severely damaged by FTC settlement &mdash; visible in search results and reviews</li>
+          <li>Confusing product bundling &mdash; users can't quickly understand what they're buying</li>
+          <li>Feels like a 2010-era infomercial website in a market that has moved to community-led platforms</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ─── SECTION 5 · PATTERN ANALYSIS ──────────────────────────── -->
+<section class="section" id="analysis">
+  <div class="section-header">
+    <div class="sec-num">5</div>
+    <h2>Deep Comparative Analysis</h2>
+  </div>
+
+  <h3 style="color:var(--teal);margin-bottom:1.2rem;font-family:'Montserrat',sans-serif;">What the Top 5 Always Do</h3>
+  <div class="pattern-list" style="margin-bottom:3rem;">
+    <div class="pattern-item">
+      <div class="pattern-label pl-win">Crystal Clear Positioning</div>
+      <div class="pattern-content"><strong>Every top site owns a specific niche within a niche.</strong> Noom doesn't say "fitness app" &mdash; they say "psychology-based weight loss." Parsley Health doesn't say "healthcare" &mdash; they say "root cause medicine." Girls Gone Strong doesn't say "fitness for women" &mdash; they say "strength training for women." This specificity drives keyword clarity, emotional resonance, and word-of-mouth growth.</div>
+    </div>
+    <div class="pattern-item">
+      <div class="pattern-label pl-win">Layered Social Proof</div>
+      <div class="pattern-content"><strong>Trust is stacked, not stated.</strong> Volume (45M users), quality (featured in NYT, WSJ), specificity (89% improvement rates), and community (1M+ followers) all appear together. No top site relies on just one form of proof &mdash; they layer press logos, patient stats, before/afters, and expert credentials simultaneously throughout the page.</div>
+    </div>
+    <div class="pattern-item">
+      <div class="pattern-label pl-win">Mobile-First Conversion</div>
+      <div class="pattern-content"><strong>The primary CTA works perfectly on a 375px screen.</strong> All top 5 have a single, prominent action above the fold on mobile &mdash; whether it's a quiz, a "Book a consultation" button, or a "Start free trial" link. Secondary CTAs appear in context as you scroll, not competing with the hero action.</div>
+    </div>
+    <div class="pattern-item">
+      <div class="pattern-label pl-win">Educational Content as SEO Engine</div>
+      <div class="pattern-content"><strong>The blog or resource library is the main source of organic traffic, not the homepage.</strong> Mindbodygreen gets millions of monthly visits from content. Defy Medical's peptide education articles rank for high-intent search terms. Girls Gone Strong's training guides capture women searching for strength programs. Content is a long-term trust and traffic asset, not an afterthought.</div>
+    </div>
+    <div class="pattern-item">
+      <div class="pattern-label pl-win">Transparent Credentialing</div>
+      <div class="pattern-content"><strong>Every claim is backed by a face and credentials.</strong> Doctor photos with board certifications (Parsley, Defy), expert author bylines (Mindbodygreen), certified trainer bios (GGS). In regulated health niches, anonymity is conversion death &mdash; the best sites lead with human authority, not brand logos.</div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--magenta);margin-bottom:1.2rem;font-family:'Montserrat',sans-serif;">What the Bottom 5 Always Lack</h3>
+  <div class="pattern-list">
+    <div class="pattern-item">
+      <div class="pattern-label pl-fail">Trust Infrastructure</div>
+      <div class="pattern-content"><strong>The bottom 5 look anonymous and unaccountable.</strong> No named practitioners, no certifications shown, no physical address, no clear company history. In healthcare and supplement niches, this is instantly disqualifying. Without trust signals, every visitor is asking "is this legit?" &mdash; and the site never answers.</div>
+    </div>
+    <div class="pattern-item">
+      <div class="pattern-label pl-fail">Value Proposition Clarity</div>
+      <div class="pattern-content"><strong>Visitors can't articulate what makes these sites worth choosing.</strong> The bottom 5 all describe what they sell, but none communicate why their version is better, safer, or more effective than the 50 alternatives Google shows. Generic language ("quality products," "cutting edge research") fills the space where a compelling positioning statement should live.</div>
+    </div>
+    <div class="pattern-item">
+      <div class="pattern-label pl-fail">Lead Capture Beyond Purchase</div>
+      <div class="pattern-content"><strong>There's no middle path between "buy now" and leaving.</strong> None of the bottom 5 offer a meaningful reason to give an email address &mdash; no free guide, no quiz, no consultation booking. Visitors in the consideration phase (the majority) have nothing to do, so they leave and are never retargeted. Top sites capture leads at every intent level.</div>
+    </div>
+    <div class="pattern-item">
+      <div class="pattern-label pl-fail">Content and SEO Investment</div>
+      <div class="pattern-content"><strong>All bottom 5 are essentially invisible in organic search.</strong> No blog content means no keyword rankings means no free traffic. The peptide bottom-tier sites have near-zero domain authority. Without content, growth requires paid advertising indefinitely &mdash; an unsustainable cost structure for most small businesses.</div>
+    </div>
+    <div class="pattern-item">
+      <div class="pattern-label pl-fail">Design Coherence</div>
+      <div class="pattern-content"><strong>Visual design signals whether a brand can be trusted with your body and money.</strong> The bottom 5 share cluttered layouts, inconsistent type hierarchies, stock-photo overload, and dated color schemes. In a market where top competitors invest heavily in brand design, a visually poor site communicates "we don't care enough to look professional."</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ─── SECTION 6 · BLUEPRINT ──────────────────────────────────── -->
+<section class="section" id="blueprint">
+  <div class="section-header">
+    <div class="sec-num">6</div>
+    <h2>Blueprint &mdash; 10 Principles for Your Client Builds</h2>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2.5rem;max-width:700px;">These are the repeatable principles distilled from the top performers that you can systematically apply across every Fitness, Women's Health, and Peptide client site you build.</p>
+
+  <div class="principles-grid">
+
+    <div class="principle-card">
+      <div class="principle-header ph-teal">
+        <div class="p-num">01</div>
+        <div class="p-title">Niche-Within-Niche Positioning</div>
+      </div>
+      <div class="principle-body">Never let clients say "fitness coaching" or "health products." Define the specific person, problem, and promise. Specificity creates SEO clarity, referral language, and emotional resonance that broad positioning can never achieve.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-header ph-pink">
+        <div class="p-num">02</div>
+        <div class="p-title">Trust-First Above the Fold</div>
+      </div>
+      <div class="principle-body">Lead with credentials, not features. Doctor/trainer photo, certification badge, media logo bar, or client count should appear before any product offer. In health niches, the purchase decision is trust-first, price-second.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-header ph-teal">
+        <div class="p-num">03</div>
+        <div class="p-title">Single Hero CTA with Micro-Commit</div>
+      </div>
+      <div class="principle-body">One primary action above the fold &mdash; ideally a low-friction micro-commitment like a quiz, a free assessment, or a consultation booking. Avoid "Shop Now" as the primary CTA &mdash; it skips the trust-building step and converts poorly from cold traffic.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-header ph-pink">
+        <div class="p-num">04</div>
+        <div class="p-title">Three-Layer Social Proof Stack</div>
+      </div>
+      <div class="principle-body">Layer proof by volume (X clients/users), specificity (named testimonials with photos and outcomes), and authority (press logos, certifications, endorsements). Each layer reaches a different buyer psychology &mdash; use all three.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-header ph-teal">
+        <div class="p-num">05</div>
+        <div class="p-title">Content Blog as SEO Foundation</div>
+      </div>
+      <div class="principle-body">Recommend a 12-article content plan at launch targeting long-tail intent keywords. This creates organic traffic, builds domain authority, and positions the brand as an educational resource. ROI compounds over 12&ndash;24 months.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-header ph-pink">
+        <div class="p-num">06</div>
+        <div class="p-title">Lead Magnet at Every Intent Level</div>
+      </div>
+      <div class="principle-body">Design three capture points: (1) high-intent &mdash; book a consultation, (2) mid-intent &mdash; download a free guide or take a quiz, (3) low-intent &mdash; join the email list for tips. Each captures a different visitor before they leave.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-header ph-teal">
+        <div class="p-num">07</div>
+        <div class="p-title">Mobile-First, No Exceptions</div>
+      </div>
+      <div class="principle-body">60&ndash;70% of health niche traffic is mobile. Design in mobile viewport first and expand to desktop, not the reverse. Test the primary CTA, trust section, and lead capture on 375px before launch. Google ranks mobile experience &mdash; not desktop.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-header ph-pink">
+        <div class="p-num">08</div>
+        <div class="p-title">Human Authority Over Brand Voice</div>
+      </div>
+      <div class="principle-body">Lead with the founder, practitioner, or coach &mdash; not the brand logo. Name, face, credentials, and story create the connection that converts in health niches. "Meet Dr. Sarah, Board-Certified OB-GYN" outperforms "Trusted Women's Health Platform" every time.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-header ph-teal">
+        <div class="p-num">09</div>
+        <div class="p-title">Compliance as Competitive Advantage</div>
+      </div>
+      <div class="principle-body">In peptide and medical niches especially, being visibly compliant (licensed practitioners, proper disclaimers, transparent protocols, real addresses) converts skeptical visitors that grey-market competitors lose. Compliance isn't just legal protection &mdash; it's positioning.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-header ph-pink">
+        <div class="p-num">10</div>
+        <div class="p-title">Outcome-Based Copywriting</div>
+      </div>
+      <div class="principle-body">Every headline should state the transformation, not the product. "Lose weight" &rarr; "Feel confident in your body by summer." "Peptide therapy" &rarr; "Recover faster, sleep deeper, perform at your best past 40." Outcome language sells; feature language just describes.</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ─── SECTION 7 · SCORECARD ──────────────────────────────────── -->
+<section class="section" id="scorecard">
+  <div class="section-header">
+    <div class="sec-num">7</div>
+    <h2>Full Ranking Scorecard</h2>
+  </div>
+
+  <div class="podium">
+    <div class="podium-item">
+      <div class="podium-pos">2</div>
+      <div class="podium-name">Mindbodygreen</div>
+      <div class="podium-score">89 pts</div>
+    </div>
+    <div class="podium-item">
+      <div class="podium-pos">1</div>
+      <div class="podium-name">Noom</div>
+      <div class="podium-score">91 pts</div>
+    </div>
+    <div class="podium-item">
+      <div class="podium-pos">3</div>
+      <div class="podium-name">Parsley Health</div>
+      <div class="podium-score">86 pts</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="score-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Site</th>
+          <th>Niche</th>
+          <th>SEO</th>
+          <th>Trust</th>
+          <th>Design</th>
+          <th>CRO</th>
+          <th>Content</th>
+          <th>Social</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="top-row"><td class="rank-col">1</td><td>Noom</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td>24</td><td>18</td><td>18</td><td>14</td><td>8</td><td>9</td><td><span class="score-pill sp-elite">91</span></td></tr>
+        <tr class="top-row"><td class="rank-col">2</td><td>Mindbodygreen</td><td><span class="niche-tag nt-womens">Women's</span></td><td>24</td><td>19</td><td>18</td><td>12</td><td>10</td><td>6</td><td><span class="score-pill sp-elite">89</span></td></tr>
+        <tr class="top-row"><td class="rank-col">3</td><td>Parsley Health</td><td><span class="niche-tag nt-womens">Women's</span></td><td>21</td><td>19</td><td>20</td><td>14</td><td>7</td><td>5</td><td><span class="score-pill sp-elite">86</span></td></tr>
+        <tr class="top-row"><td class="rank-col">4</td><td>Defy Medical</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td>22</td><td>18</td><td>17</td><td>14</td><td>9</td><td>5</td><td><span class="score-pill sp-elite">85</span></td></tr>
+        <tr class="top-row"><td class="rank-col">5</td><td>Girls Gone Strong</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td>21</td><td>17</td><td>17</td><td>13</td><td>9</td><td>5</td><td><span class="score-pill sp-strong">82</span></td></tr>
+        <tr><td class="rank-col">6</td><td>Galveston Diet</td><td><span class="niche-tag nt-womens">Women's</span></td><td>20</td><td>17</td><td>16</td><td>12</td><td>9</td><td>6</td><td><span class="score-pill sp-strong">80</span></td></tr>
+        <tr><td class="rank-col">7</td><td>Maven Clinic</td><td><span class="niche-tag nt-womens">Women's</span></td><td>20</td><td>18</td><td>16</td><td>13</td><td>7</td><td>5</td><td><span class="score-pill sp-strong">79</span></td></tr>
+        <tr><td class="rank-col">8</td><td>Tone It Up</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td>19</td><td>15</td><td>17</td><td>12</td><td>7</td><td>7</td><td><span class="score-pill sp-strong">77</span></td></tr>
+        <tr><td class="rank-col">9</td><td>The Body Coach</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td>19</td><td>15</td><td>16</td><td>13</td><td>7</td><td>6</td><td><span class="score-pill sp-strong">76</span></td></tr>
+        <tr><td class="rank-col">10</td><td>Tailor Made Compounding</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td>18</td><td>16</td><td>15</td><td>13</td><td>8</td><td>5</td><td><span class="score-pill sp-strong">75</span></td></tr>
+        <tr><td class="rank-col">11</td><td>Elektra Health</td><td><span class="niche-tag nt-womens">Women's</span></td><td>18</td><td>16</td><td>16</td><td>12</td><td>7</td><td>5</td><td><span class="score-pill sp-strong">74</span></td></tr>
+        <tr><td class="rank-col">12</td><td>Tia Health</td><td><span class="niche-tag nt-womens">Women's</span></td><td>18</td><td>16</td><td>15</td><td>12</td><td>7</td><td>5</td><td><span class="score-pill sp-strong">73</span></td></tr>
+        <tr><td class="rank-col">13</td><td>Centr</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td>18</td><td>14</td><td>16</td><td>12</td><td>6</td><td>6</td><td><span class="score-pill sp-strong">72</span></td></tr>
+        <tr><td class="rank-col">14</td><td>Sweat</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td>18</td><td>14</td><td>15</td><td>12</td><td>6</td><td>6</td><td><span class="score-pill sp-strong">71</span></td></tr>
+        <tr><td class="rank-col">15</td><td>Dr. Jolene Brighten</td><td><span class="niche-tag nt-womens">Women's</span></td><td>17</td><td>14</td><td>15</td><td>12</td><td>7</td><td>5</td><td><span class="score-pill sp-strong">70</span></td></tr>
+        <tr><td class="rank-col">16</td><td>Ob&eacute; Fitness</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td>16</td><td>13</td><td>16</td><td>12</td><td>6</td><td>5</td><td><span class="score-pill sp-mid">68</span></td></tr>
+        <tr><td class="rank-col">17</td><td>Aaptiv</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td>15</td><td>13</td><td>14</td><td>11</td><td>6</td><td>5</td><td><span class="score-pill sp-mid">64</span></td></tr>
+        <tr><td class="rank-col">18</td><td>Limitless Biotech</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td>14</td><td>12</td><td>13</td><td>11</td><td>6</td><td>5</td><td><span class="score-pill sp-mid">61</span></td></tr>
+        <tr><td class="rank-col">19</td><td>Protide Health</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td>13</td><td>11</td><td>12</td><td>11</td><td>6</td><td>4</td><td><span class="score-pill sp-mid">57</span></td></tr>
+        <tr><td class="rank-col">20</td><td>Core Peptides</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td>13</td><td>11</td><td>12</td><td>10</td><td>6</td><td>4</td><td><span class="score-pill sp-mid">56</span></td></tr>
+        <tr><td class="rank-col">21</td><td>Healthy Women</td><td><span class="niche-tag nt-womens">Women's</span></td><td>13</td><td>11</td><td>11</td><td>10</td><td>6</td><td>4</td><td><span class="score-pill sp-mid">55</span></td></tr>
+        <tr class="bot-row"><td class="rank-col" style="color:var(--magenta)">22</td><td>Swiss Chems</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td>11</td><td>8</td><td>10</td><td>9</td><td>5</td><td>4</td><td><span class="score-pill sp-low">47</span></td></tr>
+        <tr class="bot-row"><td class="rank-col" style="color:var(--magenta)">23</td><td>Pure Rawz</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td>10</td><td>7</td><td>9</td><td>9</td><td>4</td><td>4</td><td><span class="score-pill sp-low">43</span></td></tr>
+        <tr class="bot-row"><td class="rank-col" style="color:var(--magenta)">24</td><td>Amino Asylum</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td>9</td><td>7</td><td>8</td><td>8</td><td>4</td><td>4</td><td><span class="score-pill sp-low">40</span></td></tr>
+        <tr class="bot-row"><td class="rank-col" style="color:var(--magenta)">25</td><td>Biosynth Labs</td><td><span class="niche-tag nt-peptide">Peptide</span></td><td>8</td><td>6</td><td>8</td><td>7</td><td>4</td><td>3</td><td><span class="score-pill sp-low">36</span></td></tr>
+        <tr class="bot-row"><td class="rank-col" style="color:var(--magenta)">26</td><td>Beachbody</td><td><span class="niche-tag nt-fitness">Fitness</span></td><td>7</td><td>5</td><td>8</td><td>7</td><td>4</td><td>3</td><td><span class="score-pill sp-low">34</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-brand">Katie Miller <span>Coaching</span></div>
+  <div class="color-dots">
+    <div class="color-dot" style="background:#e66aa6"></div>
+    <div class="color-dot" style="background:#8de0d4"></div>
+    <div class="color-dot" style="background:#27b2b1"></div>
+    <div class="color-dot" style="background:#c22392"></div>
+    <div class="color-dot" style="background:#ffe98c"></div>
+  </div>
+  <p>Competitive Website Analysis &middot; Fitness, Women's Health &amp; Peptide Niches &middot; 2025</p>
+  <p style="margin-top:0.5rem;">Online Growth Consultancy &middot; Website Builds &amp; Customer Acquisition</p>
+</footer>
+
+</body>
+</html>

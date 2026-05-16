@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programs — Katie Miller Wellness Coach</title>
+  <meta name="description" content="Two ways to work with Katie Miller — a $27/month membership packed with live coaching, perimenopause guidance, peptide education, and more, or a private $197 1:1 consultation." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── PROGRAMS PAGE ─────────────────────────────── */
+    .program-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .program-full {
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1.5px solid var(--border);
+      transition: box-shadow 0.25s, transform 0.2s;
+    }
+    .program-full:hover {
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+      transform: translateY(-4px);
+    }
+
+    .program-full--featured {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .program-full__header {
+      padding: 2.5rem 2.5rem 2rem;
+    }
+
+    .program-full__badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.8rem;
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+    }
+    .program-full--featured .program-full__badge {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+    .program-full--consult .program-full__badge {
+      background: var(--bg-soft);
+      color: var(--text-muted);
+    }
+
+    .program-full__icon { font-size: 2.2rem; margin-bottom: 0.75rem; }
+
+    .program-full__name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .program-full__price {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      margin: 0.75rem 0 0.3rem;
+    }
+    .program-full__price span {
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+    .program-full--featured .program-full__price span { opacity: 0.7; }
+    .program-full--consult .program-full__price span { color: var(--text-muted); }
+
+    .program-full__tagline {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+    .program-full--featured .program-full__tagline { color: rgba(255,255,255,0.7); }
+    .program-full--consult .program-full__tagline { color: var(--text-muted); }
+
+    .program-full__body {
+      padding: 0 2.5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .program-full__desc {
+      font-size: 0.97rem;
+      line-height: 1.75;
+      margin-bottom: 1.75rem;
+    }
+    .program-full--featured .program-full__desc { color: rgba(255,255,255,0.82); }
+    .program-full--consult .program-full__desc { color: var(--text-muted); }
+
+    .program-full__divider {
+      height: 1px;
+      margin-bottom: 1.75rem;
+    }
+    .program-full--featured .program-full__divider { background: rgba(255,255,255,0.15); }
+    .program-full--consult .program-full__divider { background: var(--border); }
+
+    .program-full__includes-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .program-full--featured .program-full__includes-label { color: rgba(255,255,255,0.55); }
+    .program-full--consult .program-full__includes-label { color: var(--text-muted); }
+
+    .program-full__features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 2rem;
+      flex: 1;
+    }
+    .program-full__features li {
+      font-size: 0.92rem;
+      padding-left: 1.5rem;
+      position: relative;
+      line-height: 1.5;
+    }
+    .program-full__features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+    .program-full--featured .program-full__features li { color: rgba(255,255,255,0.88); }
+    .program-full--featured .program-full__features li::before { color: rgba(255,255,255,0.6); }
+    .program-full--consult .program-full__features li { color: var(--text-muted); }
+    .program-full--consult .program-full__features li::before { color: var(--accent); }
+
+    .program-full--featured .btn--outline {
+      color: #fff;
+      border-color: rgba(255,255,255,0.5);
+    }
+    .program-full--featured .btn--outline:hover {
+      border-color: #fff;
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* ── COMPARISON TABLE ─────────────────────────── */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.93rem;
+    }
+    .compare-table th {
+      padding: 1rem 1.25rem;
+      text-align: left;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .compare-table th:not(:first-child) { text-align: center; }
+    .compare-table td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .compare-table td:not(:first-child) { text-align: center; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:hover td { background: var(--bg-soft); }
+    .compare-table .check { color: var(--accent); font-size: 1.1rem; font-weight: 700; }
+    .compare-table .dash { color: var(--border); }
+    .compare-table td:first-child { font-weight: 500; color: var(--text); }
+    .compare-table th:nth-child(2) { color: var(--accent-dark); }
+
+    .compare-wrap {
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* ── FAQ TEASER ───────────────────────────────── */
+    .faq-teaser {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .faq-teaser-item {
+      background: var(--bg-soft);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+    }
+    .faq-teaser-item h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .faq-teaser-item p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .program-hero-grid { grid-template-columns: 1fr; }
+      .compare-table th:nth-child(3),
+      .compare-table td:nth-child(3) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo">
+          <span class="nav__logo-name">Katie Miller</span>
+          <span class="nav__logo-sub">Wellness Coach</span>
+        </a>
+        <ul class="nav__links">
+          <li><a href="my-story.html">My Story</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener">Peptides</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener">Community</a></li>
+          <li><a href="contact.html">Work With Me</a></li>
+          <li><a href="contact.html" class="btn-nav">Book a Session →</a></li>
+        </ul>
+        <button class="nav__hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <nav class="nav__drawer">
+    <a href="my-story.html">My Story</a>
+    <a href="programs.html">Programs</a>
+    <a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener">Peptides</a>
+    <a href="faq.html">FAQ</a>
+    <a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener">Community</a>
+    <a href="contact.html">Work With Me</a>
+    <a href="contact.html" class="btn btn--primary" style="margin-top:0.5rem;">Book a Session →</a>
+  </nav>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Programs</p>
+      <h1>Two ways to work with me</h1>
+      <p>Both options are built specifically for women 40+ — combining fitness, hormonal health, and peptide education into one integrated approach.</p>
+    </div>
+  </section>
+
+  <!-- ===== PROGRAMS GRID ===== -->
+  <section class="section">
+    <div class="container">
+
+      <!-- Skool community banner -->
+      <a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener" style="display:block;margin-bottom:3.5rem;border-radius:20px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.12);">
+        <img src="images/skool-banner.png" alt="The Game On Community — Katie Miller Coaching" style="width:100%;display:block;">
+      </a>
+
+      <div class="program-hero-grid" id="membership">
+
+        <!-- MEMBERSHIP -->
+        <div class="program-full program-full--featured">
+          <div class="program-full__header">
+            <span class="program-full__badge">Most popular · Best value</span>
+            <div class="program-full__icon">🌟</div>
+            <h2 class="program-full__name">Monthly Membership</h2>
+            <div class="program-full__price">$27<span>/month</span></div>
+            <p class="program-full__tagline">Everything you need — for less than a dollar a day</p>
+          </div>
+          <div class="program-full__body">
+            <p class="program-full__desc">
+              The membership is your all-in-one coaching community. Every month you get live weekly calls with Katie, perimenopause education, peptide consultations, meal plans, workouts, recipe guides, and wellness resources — all built specifically for women over 40. Cancel anytime.
+            </p>
+            <div class="program-full__divider"></div>
+            <p class="program-full__includes-label">What's included</p>
+            <ul class="program-full__features">
+              <li>Weekly live coaching calls with Katie</li>
+              <li>Perimenopause coaching &amp; education</li>
+              <li>Peptide education &amp; group consultations</li>
+              <li>Custom meal plans updated monthly</li>
+              <li>Recipe guides &amp; food guides</li>
+              <li>Workouts designed for women 40+</li>
+              <li>Free wellness guides (downloadable)</li>
+              <li>Community support &amp; accountability</li>
+              <li>Cancel anytime — no contracts</li>
+            </ul>
+            <a href="https://buy.stripe.com/00wbIVf8x89642Z5EM5c400" target="_blank" rel="noopener" class="btn btn--outline">Join the membership →</a>
+          </div>
+        </div>
+
+        <!-- 1:1 CONSULTATION -->
+        <div class="program-full program-full--consult">
+          <div class="program-full__header">
+            <span class="program-full__badge">Private · Personalized</span>
+            <div class="program-full__icon">🎯</div>
+            <h2 class="program-full__name">1:1 Consultation</h2>
+            <div class="program-full__price">$197<span> / session</span></div>
+            <p class="program-full__tagline">40-minute private Zoom session with Katie</p>
+          </div>
+          <div class="program-full__body">
+            <p class="program-full__desc">
+              This is your dedicated, private session with Katie. Bring your specific questions, your history, your goals. Katie will give you a thorough, personalized review and walk away with a clear protocol tailored to exactly where you are and what you need.
+            </p>
+            <div class="program-full__divider"></div>
+            <p class="program-full__includes-label">What's included</p>
+            <ul class="program-full__features">
+              <li>40-minute private Zoom with Katie</li>
+              <li>Personalized fitness &amp; nutrition review</li>
+              <li>Women's hormonal health guidance</li>
+              <li>Perimenopause support &amp; strategy</li>
+              <li>Peptide education tailored to your goals</li>
+              <li>Actionable protocol to take home</li>
+              <li>Follow-up resource recommendations</li>
+            </ul>
+            <a href="contact.html" class="btn btn--outline">Book your session →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COMPARISON TABLE -->
+      <div class="section__header">
+        <p class="eyebrow">Compare</p>
+        <h2>Side by side</h2>
+      </div>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Membership — $27/mo</th>
+              <th>1:1 Session — $197</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Weekly live coaching calls</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="dash">—</span></td>
+            </tr>
+            <tr>
+              <td>Perimenopause coaching &amp; education</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Peptide education &amp; consultations</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Meal plans &amp; recipe guides</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="dash">—</span></td>
+            </tr>
+            <tr>
+              <td>Workouts for women 40+</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="dash">—</span></td>
+            </tr>
+            <tr>
+              <td>Personalized 1:1 deep-dive</td>
+              <td><span class="dash">—</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Custom protocol built for you</td>
+              <td><span class="dash">—</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Community &amp; accountability</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="dash">—</span></td>
+            </tr>
+            <tr>
+              <td>Ongoing monthly support</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="dash">—</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUICK FAQ ===== -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Common questions</p>
+        <h2>Good things to know</h2>
+      </div>
+      <div class="faq-teaser">
+        <div class="faq-teaser-item">
+          <h4>Which option should I start with?</h4>
+          <p>If you want ongoing community, live calls, and a steady stream of resources, the membership is the best value by far. If you have specific questions you want answered right now — your hormones, your results, whether peptides make sense for you — the 1:1 session is the fastest path to clarity.</p>
+        </div>
+        <div class="faq-teaser-item">
+          <h4>Can I do both?</h4>
+          <p>Absolutely. Many members join the membership for the ongoing support and then book a 1:1 session when they want a deeper personal review. The two work great together.</p>
+        </div>
+        <div class="faq-teaser-item">
+          <h4>Is the membership a contract?</h4>
+          <p>No. The membership is month-to-month and you can cancel anytime. No commitments, no hidden fees.</p>
+        </div>
+        <div class="faq-teaser-item">
+          <h4>Do I need to know anything about peptides already?</h4>
+          <p>Not at all. The peptide education starts from the beginning and is designed to be accessible and clear — whether you've heard of peptides before or this is the first time.</p>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:2rem;">
+        <a href="faq.html" class="btn btn--outline">See all FAQs →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BANNER ===== -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Not sure where to start?</h2>
+      <p>Book a free 20-minute discovery call. No pressure — just a conversation about where you are, what you've tried, and what might actually move the needle for you.</p>
+      <div class="btn-group" style="justify-content:center;">
+        <a href="contact.html" class="btn btn--primary">Book a free call →</a>
+        <a href="https://buy.stripe.com/00wbIVf8x89642Z5EM5c400" target="_blank" rel="noopener" class="btn btn--outline-white">Join the membership — $27/mo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__brand-name">Katie Miller</div>
+          <div class="footer__brand-sub">Wellness Coach</div>
+        </div>
+        <ul class="footer__links">
+          <li><a href="my-story.html">My Story</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener">Peptides</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener">Community</a></li>
+          <li><a href="contact.html">Work With Me</a></li>
+        </ul>
+      </div>
+      <div class="footer__bottom">
+        © 2026 Katie Miller Wellness. All rights reserved. &nbsp;|&nbsp; Results may vary. Individual outcomes depend on effort, consistency, and individual factors. Peptide education is for informational purposes only and does not constitute medical advice.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

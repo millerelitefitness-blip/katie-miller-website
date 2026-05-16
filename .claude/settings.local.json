@@ -1,0 +1,47 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:sweat.com)",
+      "WebFetch(domain:www.girlsgonestrong.com)",
+      "WebFetch(domain:www.mindbodygreen.com)",
+      "WebFetch(domain:galvestondiet.com)",
+      "WebFetch(domain:www.defymedical.com)",
+      "WebFetch(domain:www.corepeptides.com)",
+      "WebFetch(domain:www.toneitup.com)",
+      "WebFetch(domain:www.parsleyhealth.com)",
+      "WebFetch(domain:elektrahealth.com)",
+      "WebFetch(domain:drbrighten.com)",
+      "WebFetch(domain:tailormadecompounding.com)",
+      "WebFetch(domain:limitlessbiotech.us)",
+      "WebFetch(domain:www.mavenclinic.com)",
+      "WebFetch(domain:www.goop.com)",
+      "WebFetch(domain:swisschems.is)",
+      "WebFetch(domain:relivehealth.com)",
+      "WebFetch(domain:www.noom.com)",
+      "WebFetch(domain:neuroganhealth.com)",
+      "WebFetch(domain:www.womenshealthnetwork.com)",
+      "WebFetch(domain:www.trustpilot.com)",
+      "WebFetch(domain:www.thrivehormonalhealth.com)",
+      "WebFetch(domain:www.healthywomen.org)",
+      "WebFetch(domain:www.future.co)",
+      "WebFetch(domain:www.beachbodyondemand.com)",
+      "WebFetch(domain:r2medicalclinic.com)",
+      "WebFetch(domain:purawz.com)",
+      "WebFetch(domain:outliyr.com)",
+      "Bash(npm install *)",
+      "Bash(rm \"/Users/katiemiller/Website/npm install -g @anthropic-ai\")",
+      "Bash(find /Users/katiemiller -name \"*.pdf\" -newer /Users/katiemiller/.claude/plans/users-katiemiller-library-messages-atta-resilient-catmull.md 2>/dev/null)",
+      "Bash(python3 -c \"import reportlab; print\\('reportlab ok'\\)\")",
+      "Bash(pip3 install *)",
+      "Bash(python3 -c \"from reportlab.lib.pagesizes import letter; print\\('ok'\\)\")",
+      "Bash(find /Library/Fonts /System/Library/Fonts ~/Library/Fonts -iname \"*montserrat*\" -o -iname \"*poppins*\" -o -iname \"*balgin*\" 2>/dev/null | head -30)",
+      "mcp__61154781-2e47-4a81-9d03-fa83bbfdeef9__firecrawl_search",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(item['text'][:3000]\\) for item in data[:5]]\")",
+      "mcp__61154781-2e47-4a81-9d03-fa83bbfdeef9__firecrawl_scrape"
+    ],
+    "additionalDirectories": [
+      "/Users/katiemiller/Website/npm install -g @anthropic-ai"
+    ]
+  }
+}

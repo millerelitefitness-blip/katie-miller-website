@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — Katie Miller Wellness Coach</title>
+  <meta name="description" content="Real answers about perimenopause, peptides, nutrition, and working with Katie Miller. No fluff. No clinical jargon. Just straight talk for women 40+." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --faq-teal:    #27b2b1;
+      --faq-magenta: #c22392;
+      --faq-yellow:  #ffe98c;
+      --faq-cream:   #fdf6ee;
+      --faq-deep:    #0f2020;
+      --faq-muted:   #6a8080;
+      --faq-border:  #e2f0ef;
+    }
+
+    body { background: var(--faq-cream); }
+
+    /* ── HERO ── */
+    .faq-hero {
+      background: var(--faq-deep);
+      padding: 80px 40px 70px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      margin-top: var(--nav-h);
+    }
+    .faq-hero::before {
+      content: '';
+      position: absolute; top: -100px; left: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(39,178,177,0.2) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .faq-hero::after {
+      content: '';
+      position: absolute; bottom: -80px; right: -80px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(194,35,146,0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .faq-topbar {
+      position: absolute; top: 0; left: 0; right: 0; height: 6px;
+      background: linear-gradient(to right, #27b2b1, #8de0d4, #e66aa6, #c22392, #ffe98c);
+    }
+    .faq-hero__inner { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+    .faq-hero__tag {
+      font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--faq-teal); margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+    }
+    .faq-hero__tag::before, .faq-hero__tag::after {
+      content: ''; width: 36px; height: 1.5px; background: rgba(39,178,177,0.5);
+    }
+    .faq-hero h1 {
+      font-family: 'Playfair Display', serif; font-size: clamp(44px, 7vw, 80px);
+      font-weight: 900; line-height: 0.9; color: white; letter-spacing: -2px;
+      margin-bottom: 16px;
+    }
+    .faq-hero h1 em { font-style: italic; color: var(--faq-yellow); }
+    .faq-hero__sub {
+      font-size: 17px; color: rgba(255,255,255,0.55); font-weight: 300;
+      line-height: 1.65; max-width: 520px; margin: 0 auto;
+    }
+    .faq-hero__sub strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+    /* ── TABS ── */
+    .faq-tabs-wrap {
+      background: #fff;
+      border-bottom: 1.5px solid var(--faq-border);
+      position: sticky; top: var(--nav-h); z-index: 90;
+      padding: 0 40px;
+    }
+    .faq-tabs {
+      max-width: 860px; margin: 0 auto;
+      display: flex; overflow-x: auto;
+    }
+    .faq-tabs::-webkit-scrollbar { display: none; }
+    .faq-tab-btn {
+      background: none; border: none;
+      border-bottom: 3px solid transparent;
+      padding: 16px 22px;
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+      color: var(--faq-muted); cursor: pointer; white-space: nowrap;
+      transition: all 0.2s; letter-spacing: 0.3px;
+    }
+    .faq-tab-btn:hover { color: var(--faq-deep); }
+    .faq-tab-btn.active { color: var(--faq-teal); border-bottom-color: var(--faq-teal); }
+
+    /* ── MAIN ── */
+    .faq-main { max-width: 860px; margin: 0 auto; padding: 60px 40px 100px; }
+
+    /* ── CATEGORY ── */
+    .faq-cat { margin-bottom: 70px; }
+    .faq-cat__header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+    .faq-cat__icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .faq-cat__label {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: 3px; text-transform: uppercase; margin-bottom: 4px;
+    }
+    .faq-cat__title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; line-height: 1.1; }
+    .faq-cat__title em { font-style: italic; }
+
+    /* ── FAQ CARD ── */
+    .faq-card {
+      background: #fff;
+      border: 1.5px solid var(--faq-border);
+      border-radius: 16px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .faq-card:hover { box-shadow: 0 6px 24px rgba(39,178,177,0.1); }
+    .faq-card.open  { box-shadow: 0 8px 32px rgba(39,178,177,0.12); }
+
+    .faq-card__q {
+      width: 100%; background: none; border: none;
+      padding: 22px 24px; text-align: left; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600;
+      color: var(--faq-deep); line-height: 1.4; transition: color 0.2s;
+    }
+    .faq-card.open .faq-card__q { color: var(--faq-teal); }
+
+    .faq-card__arrow {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--faq-border); transition: all 0.3s;
+      font-size: 14px; color: var(--faq-muted);
+    }
+    .faq-card.open .faq-card__arrow { background: var(--faq-teal); color: white; transform: rotate(45deg); }
+
+    .faq-card__body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.3s;
+      padding: 0 24px;
+    }
+    .faq-card.open .faq-card__body { max-height: 800px; padding: 0 24px 24px; }
+
+    .faq-card__divider { height: 1.5px; background: var(--faq-border); margin-bottom: 18px; }
+
+    .faq-card__text { font-size: 15px; color: #3a5050; line-height: 1.75; }
+    .faq-card__text p { margin-bottom: 12px; }
+    .faq-card__text p:last-child { margin-bottom: 0; }
+    .faq-card__text strong { color: var(--faq-magenta); font-weight: 600; }
+    .faq-card__text .highlight {
+      background: rgba(39,178,177,0.08);
+      border-left: 3px solid var(--faq-teal);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 16px; margin: 14px 0;
+      font-style: italic; color: var(--faq-deep);
+    }
+    .faq-card__text .highlight strong { color: var(--faq-teal); }
+
+    /* ── CTA ── */
+    .faq-cta {
+      background: linear-gradient(135deg, var(--faq-teal), var(--faq-magenta));
+      border-radius: 20px; padding: 44px 48px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .faq-cta::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.08);
+    }
+    .faq-cta::after {
+      content: ''; position: absolute; bottom: -40px; left: -40px;
+      width: 150px; height: 150px; border-radius: 50%; background: rgba(255,255,255,0.06);
+    }
+    .faq-cta__tag {
+      font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 4px;
+      text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 14px;
+    }
+    .faq-cta__title {
+      font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 42px);
+      font-weight: 900; color: white; line-height: 1.05; margin-bottom: 12px;
+    }
+    .faq-cta__title em { font-style: italic; color: var(--faq-yellow); }
+    .faq-cta__sub { font-size: 16px; color: rgba(255,255,255,0.75); margin-bottom: 28px; font-weight: 300; }
+    .faq-cta__btn {
+      display: inline-block; background: white; color: var(--faq-magenta);
+      font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700;
+      padding: 15px 36px; border-radius: 100px; text-decoration: none;
+      transition: opacity 0.2s; position: relative; z-index: 1;
+    }
+    .faq-cta__btn:hover { opacity: 0.9; }
+
+    @keyframes faqFadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .faq-hero__inner > * { animation: faqFadeUp 0.5s ease both; }
+    .faq-hero__tag { animation-delay: 0.1s; }
+    .faq-hero h1   { animation-delay: 0.2s; }
+    .faq-hero__sub { animation-delay: 0.3s; }
+
+    @media (max-width: 600px) {
+      .faq-hero, .faq-main { padding-left: 20px; padding-right: 20px; }
+      .faq-tabs-wrap { padding: 0 20px; }
+      .faq-cta { padding: 32px 24px; }
+      .faq-card__q { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo">
+          <span class="nav__logo-name">Katie Miller</span>
+          <span class="nav__logo-sub">Wellness Coach</span>
+        </a>
+        <ul class="nav__links">
+          <li><a href="my-story.html">My Story</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener">Peptides</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener">Community</a></li>
+          <li><a href="contact.html">Work With Me</a></li>
+          <li><a href="contact.html" class="btn-nav">Book a Session →</a></li>
+        </ul>
+        <button class="nav__hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <nav class="nav__drawer">
+    <a href="my-story.html">My Story</a>
+    <a href="programs.html">Programs</a>
+    <a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener">Peptides</a>
+    <a href="faq.html">FAQ</a>
+    <a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener">Community</a>
+    <a href="contact.html">Work With Me</a>
+    <a href="contact.html" class="btn btn--primary" style="margin-top:0.5rem;">Book a Session →</a>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <div class="faq-hero">
+    <div class="faq-topbar"></div>
+    <div class="faq-hero__inner">
+      <div class="faq-hero__tag">Katie Miller Wellness Coach</div>
+      <h1>Got <em>Questions?</em><br>Let's be real.</h1>
+      <p class="faq-hero__sub">No clinical jargon. No fluff. Just <strong>straight answers</strong> to the stuff you're actually wondering about.</p>
+    </div>
+  </div>
+
+  <!-- ===== TABS ===== -->
+  <div class="faq-tabs-wrap">
+    <div class="faq-tabs">
+      <button class="faq-tab-btn active" onclick="scrollToSection('perimenopause', this)">🌡️ Perimenopause</button>
+      <button class="faq-tab-btn" onclick="scrollToSection('peptides', this)">💊 Peptides &amp; EllieMD</button>
+      <button class="faq-tab-btn" onclick="scrollToSection('nutrition', this)">🥗 Nutrition</button>
+      <button class="faq-tab-btn" onclick="scrollToSection('coaching', this)">🎯 Coaching</button>
+    </div>
+  </div>
+
+  <!-- ===== CONTENT ===== -->
+  <div class="faq-main">
+
+    <!-- PERIMENOPAUSE -->
+    <div class="faq-cat" id="perimenopause">
+      <div class="faq-cat__header">
+        <div class="faq-cat__icon" style="background:rgba(39,178,177,0.12);">🌡️</div>
+        <div>
+          <div class="faq-cat__label" style="color:var(--faq-teal);">Section 01</div>
+          <div class="faq-cat__title"><em>Perimenopause</em> &amp; Hormones</div>
+        </div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">Wait — am I actually in perimenopause? I'm only 42. <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>Yes, you could be. And that's not alarming — that's just biology nobody told us about. Perimenopause is a 7 to 10 year hormonal transition that can start in your late 30s or early 40s, sometimes even earlier. Your periods don't have to be irregular yet for it to be happening.</p>
+          <div class="highlight"><strong>The most common signs:</strong> brain fog, rage that comes out of nowhere, belly fat you can't explain, 3am wake-ups, exhaustion that sleep doesn't fix, and "I just don't feel like myself anymore."</div>
+          <p>If you've said any of those things in the last year, your hormones are worth paying attention to. And no — it's not just stress.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">Why do I feel like a completely different person? <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>Because in a lot of ways, your brain chemistry actually is different right now. When estrogen and progesterone fluctuate the way they do in perimenopause, it directly affects your neurotransmitters — the chemicals that regulate your mood, focus, energy, and sense of self.</p>
+          <p>So that feeling of being "flat," or short-tempered, or just off? <strong>That's a hormone symptom, not a personality change.</strong> The version of you that felt strong and clear isn't gone — she's waiting on the other side of understanding what's actually happening.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">My doctor told me everything is "normal." But I feel terrible. <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>Let's be real — this happens ALL the time and it's infuriating. Standard bloodwork often misses perimenopause because hormone levels fluctuate so much day to day. "Normal" labs don't mean your symptoms aren't real.</p>
+          <div class="highlight">"Normal" on paper can still mean you feel terrible in your body. <strong>Both things can be true.</strong></div>
+          <p>If your doctor's solution was to eat less, sleep more, or try a fan for hot flashes — that wasn't a treatment plan. That was a dismissal. You deserve better answers, and that's exactly what we work on here.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">Why can't I lose weight even though I'm doing everything right? <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>Because the rules genuinely changed after 40 — and nobody updated the playbook. When estrogen drops, your body shifts from storing fat under your skin to storing it around your organs. That's the belly that appeared out of nowhere. That's the meno-pot. And it has nothing to do with willpower.</p>
+          <p>Here's the kicker: <strong>eating less is often making it worse.</strong> Calorie restriction after 40 breaks down muscle, and less muscle means a slower metabolism. So you end up eating less AND burning less. The answer isn't less food — it's the right food, more protein, and hormone support.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">What's the deal with food noise? I think about food constantly. <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>Food noise is that constant mental chatter about food — thinking about it even when you just ate, cravings that feel like emergencies, the obsessive loop that won't quit. And it is NOT a character flaw or a willpower problem.</p>
+          <p>When estrogen drops in perimenopause, your brain's satiety signals get disrupted. Your hunger hormone goes up. Your "I'm full" signal stops working right. So your brain is literally screaming for food even when your body doesn't need it. <strong>No amount of willpower fixes a hormone problem.</strong> That's what we actually address here.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">Why am I waking up at 3am wide awake? <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>Progesterone is naturally calming. As it declines in perimenopause, falling and staying asleep gets much harder. Estrogen fluctuations also disrupt your sleep architecture — meaning even if you "sleep," you're not getting the deep restorative sleep your body needs.</p>
+          <div class="highlight">Tired but wired is one of the most common perimenopause symptoms — and one of the most fixable. <strong>This is not just how life is now.</strong></div>
+          <p>Sleep is something we work on directly — through nutrition, hormone support, and for some women, peptide therapy that specifically supports sleep quality.</p>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- PEPTIDES & ELLIEMD -->
+    <div class="faq-cat" id="peptides">
+      <div class="faq-cat__header">
+        <div class="faq-cat__icon" style="background:rgba(194,35,146,0.1);">💊</div>
+        <div>
+          <div class="faq-cat__label" style="color:var(--faq-magenta);">Section 02</div>
+          <div class="faq-cat__title">Peptides &amp; <em>EllieMD</em></div>
+        </div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">Why EllieMD? Why do YOU use it? <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>Because I tried it, it worked, and I don't recommend things that don't. That's the short answer. The longer one: I spent two years doing everything "right" — lifting, eating my protein, sleeping 7 hours — and I was still exhausted, still foggy, still dealing with weight that wouldn't budge. I was in perimenopause and fighting my body instead of working with it.</p>
+          <p>Adding peptide support through EllieMD was the missing piece for me. Better sleep, less food noise, energy that actually matched my effort, and my body finally starting to respond. <strong>I became an affiliate because it worked — not the other way around.</strong></p>
+          <div class="highlight">I only put my name behind things I personally use and believe in. EllieMD is one of them.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">Do I have to stay on peptides forever? <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>No — and this is one of the biggest misconceptions out there. Peptides are not a lifelong prescription. Most protocols are cyclical, meaning you use them for a period of time, take a break, and reassess based on how you feel and what your goals are.</p>
+          <p>Think of it less like a medication you're dependent on and more like a targeted tool that helps your body get back to functioning the way it should. <strong>The goal is always to support your body — not to create dependency.</strong></p>
+          <p>That said, some women choose to continue long-term because the quality-of-life improvements are significant. That's a personal decision, not a requirement. We talk through all of this before you start anything.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">I've heard people get sick on peptides. Is that true? <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>Let's be real about this one. Some people do experience side effects — nausea, fatigue, headaches — especially when starting out or when the dose isn't right for them. This is real and it's worth talking about honestly.</p>
+          <p>The most common reason people feel off when starting peptides is <strong>starting too fast, too high, or without proper guidance.</strong> That's exactly why I don't just hand someone a product and wish them luck — we talk through your history, your goals, and the right approach for your body first.</p>
+          <div class="highlight">Side effects are usually dose-related and temporary. With the right starting protocol, most women tolerate peptides very well.</div>
+          <p>If something doesn't feel right, we adjust. That's how this works. You're not on your own.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">Will I lose my hair on peptides? <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>This is a fear I hear a lot — and I get it. Hair loss is already a real concern during perimenopause because of hormonal shifts, so the last thing you want is something making it worse.</p>
+          <p>Here's the truth: <strong>hair loss is not a typical or expected side effect of the peptides we use.</strong> In fact, some peptide protocols are actually associated with improvements in hair health and thickness because of their impact on cellular repair and hormone balance.</p>
+          <p>Hair loss during perimenopause is most commonly driven by estrogen dropping, cortisol spiking, nutrient deficiencies, and thyroid changes — not peptide therapy. If you're experiencing hair loss, that's a conversation worth having about your overall hormone picture, not a reason to avoid peptides.</p>
+          <div class="highlight">If you have specific concerns about your hair, bring them to me before we start anything. <strong>We look at the full picture, always.</strong></div>
+        </div></div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">Are peptides safe? I don't want to put something in my body I don't understand. <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>That's a completely fair and smart question — and honestly the right one to be asking. Peptides are short chains of amino acids, which are the building blocks your body already uses naturally. They're not synthetic hormones. They work by signaling your body to do things it already knows how to do, just more efficiently.</p>
+          <p>The peptides available through EllieMD are researched, quality-controlled, and not the sketchy "gray market" stuff you might find elsewhere online. <strong>Quality and sourcing matter enormously</strong> — which is a big part of why I chose this particular brand.</p>
+          <p>I'm not here to pressure anyone into anything. If you want to understand something before you try it, that is 100% the move. Ask me everything.</p>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- NUTRITION -->
+    <div class="faq-cat" id="nutrition">
+      <div class="faq-cat__header">
+        <div class="faq-cat__icon" style="background:rgba(141,224,212,0.2);">🥗</div>
+        <div>
+          <div class="faq-cat__label" style="color:var(--faq-teal);">Section 03</div>
+          <div class="faq-cat__title">Nutrition &amp; <em>Metabolism</em></div>
+        </div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">Do I have to follow a specific diet plan? <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>No. And we're not doing that anymore. Rigid diet plans are exactly what gets women 40+ stuck — because they're built on rules, not on understanding your body.</p>
+          <p>What we focus on instead: <strong>building a nutrition framework</strong> that works for your hormones, your lifestyle, and your real life — including the chaos, the kids, the travel, and the days when nothing goes to plan. Blood sugar stability, adequate protein, and eating in a way that's sustainable are the non-negotiables. Everything else is flexible.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">How much protein do I actually need? <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>More than you think — especially after 40. Most women are significantly under-eating protein and wondering why they can't hold on to muscle or feel satisfied after meals.</p>
+          <div class="highlight"><strong>A solid starting point:</strong> aim for at least 30 grams of protein per meal, and a minimum of 100–130 grams per day total. Active women building muscle often need more.</div>
+          <p>Protein is not just about macros. It directly triggers satiety signals, supports hormone production, preserves muscle mass, and stabilizes blood sugar. Getting this right is often the single biggest lever we can pull.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">Should I be doing intermittent fasting? Everyone seems to swear by it. <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>Let's be real — intermittent fasting can work really well for some people. But for women in perimenopause, it often backfires. Skipping meals spikes cortisol, which is already elevated for most of us in this stage of life. High cortisol = more belly fat storage, worse sleep, and more food noise later in the day.</p>
+          <p><strong>Extended fasting can also accelerate muscle loss after 40</strong> — which is the last thing we want when muscle is what keeps your metabolism running.</p>
+          <p>That doesn't mean eating breakfast the second you wake up is mandatory. But aggressive fasting windows are often working against the very goals you're chasing. We look at this individually, because everyone's body is different.</p>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- COACHING -->
+    <div class="faq-cat" id="coaching">
+      <div class="faq-cat__header">
+        <div class="faq-cat__icon" style="background:rgba(255,233,140,0.3);">🎯</div>
+        <div>
+          <div class="faq-cat__label" style="color:#9a6f00;">Section 04</div>
+          <div class="faq-cat__title">Working With <em>Katie</em></div>
+        </div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">Who is this for? Is it right for me? <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>This is for women 40+ who are done guessing and ready to actually understand what's happening in their bodies. You might be dealing with perimenopause symptoms, food noise, stubborn weight, terrible sleep, zero energy — or just that nagging feeling that something's off and nobody's given you real answers.</p>
+          <div class="highlight">If you've ever said <strong>"I'm doing everything right and still feel like garbage"</strong> — you're exactly who this is for.</div>
+          <p>You don't need to have it all figured out before you reach out. That's literally what I'm here for.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">I'm really busy. I don't have time for another complicated program. <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>Same. I'm a mom-in-the-chaos too — I built everything here around real life, not an idealized version of it. We're not adding 2 hours of meal prep and a 90-minute morning routine to your already full plate.</p>
+          <p><strong>We're removing the guesswork</strong> so the things you ARE doing actually work. Targeted, not overwhelming. That's the whole point.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">What makes you different from every other wellness coach out there? <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>I've lived this. I was in perimenopause chaos — the exhaustion, the weight, the fog, the feeling of being completely disconnected from my own body. I didn't learn about this from a textbook. I learned it the hard way, figured out what actually worked, and built a coaching practice around sharing that.</p>
+          <p>I'm also not going to tell you what you want to hear just to keep you comfortable. <strong>I'm a hype girl with standards</strong> — I'll celebrate you AND call you forward at the same time. No toxic positivity. No one-size-fits-all protocols. Just real talk and real results.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-card" onclick="toggleFaq(this)">
+        <button class="faq-card__q">How do I get started? <div class="faq-card__arrow">+</div></button>
+        <div class="faq-card__body"><div class="faq-card__divider"></div><div class="faq-card__text">
+          <p>The easiest first step is a DM. Seriously. No formal intake form, no pressure, no sales pitch disguised as a "free call." Just a real conversation about where you're at and whether this is a good fit.</p>
+          <div class="highlight">DM me the word <strong>GAME ON</strong> on Instagram and we'll take it from there. No obligation. Just real talk.</div>
+          <p>If you're ready to join the community right now, you can do that too — everything you need is inside The Game On Community on Skool. Pull up a chair. 💛</p>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="faq-cta">
+      <div class="faq-cta__tag">Still have questions?</div>
+      <div class="faq-cta__title">Let's talk. <em>Game on.</em></div>
+      <p class="faq-cta__sub">DM me on Instagram or jump into the community. Either way — I've got you.</p>
+      <a href="contact.html" class="faq-cta__btn">Work with me →</a>
+    </div>
+
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__brand-name">Katie Miller</div>
+          <div class="footer__brand-sub">Wellness Coach</div>
+        </div>
+        <ul class="footer__links">
+          <li><a href="my-story.html">My Story</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="https://katiemillercoaching.com/peptide-101" target="_blank" rel="noopener">Peptides</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="https://www.skool.com/the-game-on-community" target="_blank" rel="noopener">Community</a></li>
+          <li><a href="contact.html">Work With Me</a></li>
+        </ul>
+      </div>
+      <div class="footer__bottom">
+        © 2026 Katie Miller Wellness. All rights reserved. &nbsp;|&nbsp; Results may vary. Individual outcomes depend on effort, consistency, and individual factors. Peptide education is for informational purposes only and does not constitute medical advice.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    function toggleFaq(card) {
+      const wasOpen = card.classList.contains('open');
+      document.querySelectorAll('.faq-card.open').forEach(el => el.classList.remove('open'));
+      if (!wasOpen) card.classList.add('open');
+    }
+
+    function scrollToSection(id, btn) {
+      document.querySelectorAll('.faq-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const el = document.getElementById(id);
+      if (el) {
+        const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
+        const top = el.getBoundingClientRect().top + window.scrollY - navH - 60;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+  </script>
+</body>
+</html>
