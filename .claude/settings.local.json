@@ -38,7 +38,8 @@
       "Bash(find /Library/Fonts /System/Library/Fonts ~/Library/Fonts -iname \"*montserrat*\" -o -iname \"*poppins*\" -o -iname \"*balgin*\" 2>/dev/null | head -30)",
       "mcp__61154781-2e47-4a81-9d03-fa83bbfdeef9__firecrawl_search",
       "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(item['text'][:3000]\\) for item in data[:5]]\")",
-      "mcp__61154781-2e47-4a81-9d03-fa83bbfdeef9__firecrawl_scrape"
+      "mcp__61154781-2e47-4a81-9d03-fa83bbfdeef9__firecrawl_scrape",
+      "mcp__2c53d39a-b504-43cd-ad50-8707a8428b12__search_threads"
     ],
     "additionalDirectories": [
       "/Users/katiemiller/Website/npm install -g @anthropic-ai"
